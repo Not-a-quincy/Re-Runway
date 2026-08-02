@@ -1,0 +1,136 @@
+<footer class="site-footer">
+
+    <section class="footer-newsletter">
+        <div class="footer-newsletter-inner">
+            <div class="footer-newsletter-copy">
+                <span class="hero-tag">JOIN THE VAULT LIST</span>
+                <h2 class="footer-newsletter-title">GET 10% OFF YOUR FIRST DROP</h2>
+                <p class="footer-newsletter-sub">New arrivals, restocks, and steal deals — straight to your inbox, no spam.</p>
+            </div>
+            <form class="footer-newsletter-form" id="newsletter-form" novalidate>
+                <input class="search-input footer-newsletter-input" type="email" placeholder="YOUR EMAIL" required id="newsletter-email">
+                <button class="cart-btn neo-shadow_blk footer-newsletter-btn" type="submit" id="newsletter-btn">
+                    <span>SUBSCRIBE</span>
+                </button>
+            </form>
+            <p class="inline-message" id="newsletter-msg" style="display:none;"></p>
+        </div>
+    </section>
+
+    <section class="footer-trust">
+        <div class="footer-trust-item">
+            <span class="material-symbols-outlined">verified_user</span>
+            <span>Every item authenticated</span>
+        </div>
+        <div class="footer-trust-item">
+            <span class="material-symbols-outlined">lock</span>
+            <span>Secure checkout</span>
+        </div>
+        <div class="footer-trust-item">
+            <span class="material-symbols-outlined">replay</span>
+            <span>7-day easy returns</span>
+        </div>
+        <div class="footer-trust-item">
+            <span class="material-symbols-outlined">local_shipping</span>
+            <span>Tracked shipping, pan-India</span>
+        </div>
+    </section>
+
+    <section class="footer-main">
+
+        <div class="footer-brand">
+            <span class="logo">Re-Runway</span>
+            <p class="footer-brand-tagline">Handpicked streetwear, given a second life.</p>
+            <div class="footer-socials">
+                <a href="https://instagram.com/rerunway" target="_blank" rel="noopener noreferrer" class="footer-social-btn neo-shadow_blk" aria-label="Instagram">
+                    <span class="material-symbols-outlined">photo_camera</span>
+                </a>
+                <a href="https://twitter.com/rerunway" target="_blank" rel="noopener noreferrer" class="footer-social-btn neo-shadow_blk" aria-label="X / Twitter">
+                    <span class="material-symbols-outlined">tag</span>
+                </a>
+                <a href="https://wa.me/<%= (whatsappNumber || '').replace(/[^\d]/g, '') %>" target="_blank" rel="noopener noreferrer" class="footer-social-btn neo-shadow_blk" aria-label="WhatsApp" id="footer-wa-link">
+                    <span class="material-symbols-outlined">chat</span>
+                </a>
+            </div>
+        </div>
+
+        <nav class="footer-links">
+            <h3>SHOP</h3>
+            <a href="/catalogue">Shop All</a>
+            <a href="/catalogue?sort=price_asc">Price: Low to High</a>
+            <a href="/catalogue?sort=newest">Newest</a>
+        </nav>
+
+        <nav class="footer-links">
+            <h3>HELP</h3>
+            <a href="/size-guide">Size Guide</a>
+            <a href="/returns">Returns &amp; Exchanges</a>
+            <a href="/#grading">Condition Grading</a>
+            <a href="/contact">Contact Us</a>
+        </nav>
+
+        <nav class="footer-links">
+            <h3>COMPANY</h3>
+            <a href="/about">About Re-Runway</a>
+            <a href="/contact">Sell With Us</a>
+            <a href="/about#authentication">Authentication Process</a>
+        </nav>
+
+    </section>
+
+    <section class="footer-bottom">
+        <p class="footer-copyright">© <span id="footer-year">2026</span> Re-Runway. All rights reserved.</p>
+        <div class="footer-legal">
+            <a href="/returns">Returns Policy</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </section>
+
+</footer>
+
+<script>
+(function() {
+    // Update copyright year dynamically
+    var el = document.getElementById('footer-year');
+    if (el) el.textContent = new Date().getFullYear();
+
+    // Newsletter form
+    var form = document.getElementById('newsletter-form');
+    var emailInput = document.getElementById('newsletter-email');
+    var btn = document.getElementById('newsletter-btn');
+    var msg = document.getElementById('newsletter-msg');
+
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            var email = emailInput ? emailInput.value.trim() : '';
+            if (!email) return;
+            btn.disabled = true;
+            btn.querySelector('span').textContent = 'SUBSCRIBING...';
+            try {
+                var res = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                var data = await res.json();
+                if (res.ok) {
+                    msg.textContent = "You're in. Check your inbox for your 10% off code.";
+                    msg.className = 'inline-message success';
+                    emailInput.value = '';
+                } else {
+                    msg.textContent = data.error || 'Something went wrong. Try again.';
+                    msg.className = 'inline-message error';
+                }
+            } catch (err) {
+                msg.textContent = 'Could not subscribe right now. Please try again.';
+                msg.className = 'inline-message error';
+            } finally {
+                msg.style.display = 'block';
+                btn.disabled = false;
+                btn.querySelector('span').textContent = 'SUBSCRIBE';
+            }
+        });
+    }
+})();
+</script>

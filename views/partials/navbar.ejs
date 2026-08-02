@@ -1,0 +1,57 @@
+<% const currentPage = typeof page !== 'undefined' ? page : 'home'; %>
+
+<nav class="navbar">
+    <div class="nav-left">
+        <button class="menu-toggle" aria-label="Toggle Menu" id="mobile-menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a href="/" class="logo">Re-Runway</a>
+        <div class="nav-links" id="nav-links-container">
+            <a class="nav-link <%= currentPage === 'home' ? 'active' : '' %>" href="/">HOME</a>
+            <a class="nav-link <%= currentPage === 'catalogue' ? 'active' : '' %>" href="/catalogue">SHOP</a>
+            <a class="nav-link" href="/about">ABOUT</a>
+            <a class="nav-link" href="/contact">CONTACT</a>
+        </div>
+    </div>
+    <div class="nav-right">
+        <div class="search-container" id="nav-search-container">
+            <input class="search-input" placeholder="SEARCH..." type="text" id="nav-search-input" autocomplete="off">
+            <button class="nav-search-btn" id="nav-search-btn" aria-label="Search">
+            </button>
+        </div>
+        <% if (typeof user !== 'undefined' && user) { %>
+            <% if (user.role === 'admin') { %>
+                <a class="nav-link nav-account" href="/admin">ADMIN</a>
+            <% } %>
+            <a class="nav-link nav-account" href="/cart">HI, <%= user.name.split(' ')[0].toUpperCase() %></a>
+            <form action="/logout" method="POST" class="nav-logout-form">
+                <button type="submit" class="nav-link nav-logout-btn">LOG OUT</button>
+            </form>
+        <% } else { %>
+            <a class="nav-link nav-account" href="/login">LOG IN</a>
+        <% } %>
+        <a class="cart-btn neo-shadow_blk" href="/cart">
+            <span class="material-symbols-outlined">shopping_cart</span>
+            <span>CART</span>
+            <span class="cart-badge" id="nav-cart-badge" hidden>0</span>
+        </a>
+    </div>
+</nav>
+
+<script>
+(function() {
+    var input = document.getElementById('nav-search-input');
+    var btn = document.getElementById('nav-search-btn');
+    if (!input || !btn) return;
+    function doSearch() {
+        var q = input.value.trim();
+        if (q) window.location.href = '/catalogue?q=' + encodeURIComponent(q);
+    }
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') doSearch();
+    });
+    btn.addEventListener('click', doSearch);
+})();
+</script>

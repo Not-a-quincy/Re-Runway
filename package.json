@@ -1,0 +1,35 @@
+{
+  "name": "rerunway",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Not-a-quincy/Re-Runway.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Not-a-quincy/Re-Runway/issues"
+  },
+  "homepage": "https://github.com/Not-a-quincy/Re-Runway#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "env": "^0.0.2",
+    "express": "^5.2.1",
+    "express-mysql-session": "^3.0.3",
+    "express-rate-limit": "^8.6.1",
+    "express-session": "^1.19.0",
+    "mysql2": "^3.23.1",
+    "nodemon": "^3.1.14"
+  }
+}

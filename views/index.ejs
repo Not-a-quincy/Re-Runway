@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Re-Runway — Verified Deadstock & Export Surplus Streetwear</title>
+    <meta name="description" content="Shop handpicked deadstock and export surplus streetwear from Carhartt WIP, Visvim, Kapital, Needles, and more. Every piece graded honestly, shipped fast across India.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/global/global.css">
+    <link rel="stylesheet" href="/css/partials.css">
+    <link rel="stylesheet" href="/css/catalogue.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <!--navbar-->
+    <%- include('partials/navbar', { page: 'home' }) %>
+
+    <main>
+
+        <section class="hero">
+                <!-- ADD id="hero-banner" HERE -->
+                <div class="banner-img-div" id="hero-banner">
+
+                    <div class="hero-content">
+                        <span class="hero-tag" id="hero-tag">NEW DROP</span>
+                        <h1 class="hero-title" id="hero-title">LOADING...</h1>
+                        <p class="hero-subtitle" id="hero-subtitle">LOADING...</p>
+                    </div>
+                
+                    <nav class="q_link_nav">
+                        <div class="q_links_container">
+                            <a class="q_link active" href="/catalogue">ALL DROPS</a>
+                            <a class="q_link" href="/catalogue?source=Tokyo%20Exclusive">TOKYO EXCLUSIVES 🇯🇵</a>
+                            <a class="q_link" href="/catalogue?category=Outerwear">OUTERWEAR</a>
+                            <a class="q_link" href="/catalogue?source=Steal%20Deal">STEAL DEALS 🔥</a>
+                        </div>
+                    </nav>
+                </div>
+            </section>
+
+            <!-- ===== MOTTO / MANIFESTO ===== -->
+            <section class="motto reveal">
+                <div class="motto-inner">
+                    <span class="hero-tag">THE MOTTO</span>
+                    <h2 class="motto-title">NEW STOCK.<br>VERIFIED SOURCES.<br><span class="motto-accent">ZERO GUESSWORK.</span></h2>
+                    <p class="motto-sub">Re-Runway sources two ways: deadstock bought directly from the brands themselves, and export surplus from trusted overseas partners. Every piece is handpicked and checked for quality before it's listed &mdash; no knockoffs, no mystery stock, just verified pieces at a fraction of retail.</p>
+                </div>
+            </section>
+
+            <!-- ===== CATEGORIES ===== -->
+            <section class="categories reveal">
+                <div class="section-head">
+                    <span class="hero-tag">SHOP BY CATEGORY</span>
+                    <h2 class="section-title">FIND YOUR LANE</h2>
+                </div>
+                <div class="category-grid">
+                    <a href="/catalogue?category=Outerwear" class="category-card neo-shadow_blk">
+                        <span class="material-symbols-outlined category-icon">checkroom</span>
+                        <h3>OUTERWEAR</h3>
+                        <span class="category-cta">SHOP NOW <span class="material-symbols-outlined">arrow_forward</span></span>
+                    </a>
+                    <a href="/catalogue?category=Denim" class="category-card neo-shadow_blk">
+                        <span class="material-symbols-outlined category-icon">dry_cleaning</span>
+                        <h3>DENIM</h3>
+                        <span class="category-cta">SHOP NOW <span class="material-symbols-outlined">arrow_forward</span></span>
+                    </a>
+                    <a href="/catalogue?category=Knitwear" class="category-card neo-shadow_blk">
+                        <span class="material-symbols-outlined category-icon">styler</span>
+                        <h3>KNITWEAR</h3>
+                        <span class="category-cta">SHOP NOW <span class="material-symbols-outlined">arrow_forward</span></span>
+                    </a>
+                    <a href="/catalogue?category=Footwear" class="category-card neo-shadow_blk">
+                        <span class="material-symbols-outlined category-icon">footprint</span>
+                        <h3>FOOTWEAR</h3>
+                        <span class="category-cta">SHOP NOW <span class="material-symbols-outlined">arrow_forward</span></span>
+                    </a>
+                    <a href="/catalogue?category=Accessories" class="category-card neo-shadow_blk">
+                        <span class="material-symbols-outlined category-icon">watch</span>
+                        <h3>ACCESSORIES</h3>
+                        <span class="category-cta">SHOP NOW <span class="material-symbols-outlined">arrow_forward</span></span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- ===== BRAND MARQUEE ===== -->
+            <section class="brand-strip reveal">
+                <div class="section-head">
+                    <span class="hero-tag">IN THE VAULT</span>
+                    <h2 class="section-title">BRANDS YOU'LL FIND</h2>
+                </div>
+                <div class="marquee">
+                    <div class="marquee-track">
+                        <span>CARHARTT WIP</span><span class="dot">&bull;</span>
+                        <span>VISVIM</span><span class="dot">&bull;</span>
+                        <span>KAPITAL</span><span class="dot">&bull;</span>
+                        <span>NEEDLES</span><span class="dot">&bull;</span>
+                        <span>STUSSY</span><span class="dot">&bull;</span>
+                        <span>CARHARTT WIP</span><span class="dot">&bull;</span>
+                        <span>VISVIM</span><span class="dot">&bull;</span>
+                        <span>KAPITAL</span><span class="dot">&bull;</span>
+                        <span>NEEDLES</span><span class="dot">&bull;</span>
+                        <span>STUSSY</span><span class="dot">&bull;</span>
+                    </div>
+                </div>
+                <p class="brand-strip-note">New brands added every drop &mdash; this list grows with the vault.</p>
+            </section>
+
+            <!-- ===== GRADING / AUTHENTICATION (signature section) ===== -->
+            <section class="grading reveal" id="grading">
+                <div class="grading-inner">
+                    <div class="section-head light">
+                        <span class="hero-tag">HOW WE GRADE</span>
+                        <h2 class="section-title">NO SURPRISES AT YOUR DOOR</h2>
+                        <p class="grading-sub">Deadstock and surplus stock sometimes carries small factory imperfections &mdash; often the exact reason a piece never made it to a retail shelf at full price. We inspect every item by hand and grade it honestly before it's listed, so what you see is exactly what ships.</p>
+                    </div>
+                    <div class="stamp-row">
+                        <div class="stamp-card stamp-s">
+                            <span class="stamp-mark">S</span>
+                            <h3>FLAWLESS</h3>
+                            <p>Zero visible flaws. Indistinguishable from a retail rack.</p>
+                        </div>
+                        <div class="stamp-card stamp-a">
+                            <span class="stamp-mark">A</span>
+                            <h3>MICRO FLAW</h3>
+                            <p>A barely-there imperfection &mdash; a faint mark or stitch irregularity you'd have to hunt for.</p>
+                        </div>
+                        <div class="stamp-card stamp-b">
+                            <span class="stamp-mark">B</span>
+                            <h3>VISIBLE FLAW</h3>
+                            <p>A noticeable but minor cosmetic flaw. Fully wearable, priced for it.</p>
+                        </div>
+                        <div class="stamp-card stamp-c">
+                            <span class="stamp-mark">C</span>
+                            <h3>OVERRUN FLAW</h3>
+                            <p>The kind of factory flaw that kept it off retail shelves. Still solid &mdash; the steepest discount.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== HOW IT WORKS ===== -->
+            <section class="how-it-works reveal">
+                <div class="section-head">
+                    <span class="hero-tag">THE PROCESS</span>
+                    <h2 class="section-title">BROWSE. GRADE-CHECK. WEAR.</h2>
+                </div>
+                <div class="steps-row">
+                    <div class="step-card">
+                        <span class="step-index">01</span>
+                        <span class="material-symbols-outlined step-icon">search</span>
+                        <h3>FILTER BY GRADE, SIZE &amp; SOURCE</h3>
+                        <p>Every listing shows its condition grade up front &mdash; no digging through photos to guess.</p>
+                    </div>
+                    <div class="step-card">
+                        <span class="step-index">02</span>
+                        <span class="material-symbols-outlined step-icon">verified_user</span>
+                        <h3>AUTHENTICATED BEFORE IT'S LISTED</h3>
+                        <p>Verified pieces are checked for authenticity before they ever go live &mdash; look for the badge.</p>
+                    </div>
+                    <div class="step-card">
+                        <span class="step-index">03</span>
+                        <span class="material-symbols-outlined step-icon">local_shipping</span>
+                        <h3>PACKED &amp; SHIPPED FAST</h3>
+                        <p>Orders go out within 2&ndash;4 days, tracked door to door.</p>
+                    </div>
+                    <div class="step-card">
+                        <span class="step-index">04</span>
+                        <span class="material-symbols-outlined step-icon">replay</span>
+                        <h3>7-DAY EASY RETURN</h3>
+                        <p>If a piece doesn't match its condition report, send it back &mdash; no argument.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== FEATURED PICKS ===== -->
+            <section class="featured reveal">
+                <div class="section-head">
+                    <span class="hero-tag">FRESH IN</span>
+                    <h2 class="section-title">RECENTLY ADDED</h2>
+                </div>
+                <div class="product-grid" id="home-featured-grid">
+                    <p class="cat-loading" id="home-featured-loading">Loading pieces…</p>
+                </div>
+                <a href="/catalogue" class="cart-btn neo-shadow_blk featured-cta">
+                    <span>SHOP THE FULL CATALOG</span>
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+            </section>
+
+            <!-- ===== FINAL CTA ===== -->
+            <section class="final-cta reveal">
+                <div class="final-cta-inner">
+                    <h2 class="final-cta-title">YOUR NEXT<br>FAVORITE PIECE<br>ALREADY HAS A STORY.</h2>
+                    <a href="/catalogue" class="cart-btn neo-shadow_blk final-cta-btn">
+                        <span>START BROWSING</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </div>
+            </section>
+
+    </main>
+
+    <%- include('partials/footer', { page: 'home' }) %>
+
+<script src="/js/index.js"></script>
+<script src="/js/home.js"></script>
+<script src="/js/partials/navbar.js"></script>
+</body>
+</html>

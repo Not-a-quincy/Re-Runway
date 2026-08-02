@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Returns & Exchanges — Re-Runway</title>
+    <meta name="description" content="Re-Runway's 7-day easy return policy. If a piece doesn't match its condition report, send it back — no argument.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/global/global.css">
+    <link rel="stylesheet" href="/css/partials.css">
+    <style>
+        .info-page { max-width: 780px; margin: 0 auto; padding: 64px 24px 96px; }
+        .info-hero-tag { display: inline-block; background-color: var(--color-on-surface); color: var(--color-surface); font-size: 11px; font-weight: 800; letter-spacing: 0.12em; padding: 4px 12px; margin-bottom: 20px; }
+        .info-page-title { font-size: clamp(32px, 6vw, 56px); font-weight: 900; text-transform: uppercase; line-height: 1.05; margin: 0 0 16px; }
+        .info-page-lead { font-size: 16px; color: var(--color-on-surface-variant); line-height: 1.75; margin: 0 0 48px; }
+        .returns-section { margin-bottom: 40px; }
+        .returns-section-title { font-size: 16px; font-weight: 900; text-transform: uppercase; margin: 0 0 14px; padding-bottom: 10px; border-bottom: 3px solid var(--color-on-surface); }
+        .returns-section p { font-size: 14px; color: var(--color-on-surface-variant); line-height: 1.85; margin: 0 0 12px; }
+        .returns-section p:last-child { margin-bottom: 0; }
+        .returns-steps { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+        .returns-step { display: flex; gap: 16px; align-items: flex-start; padding: 16px; border: 2px solid var(--color-surface-container); background: var(--color-surface-container-low); }
+        .returns-step-num { font-size: 20px; font-weight: 900; color: var(--color-primary); line-height: 1; flex-shrink: 0; width: 28px; }
+        .returns-step-body h3 { font-size: 13px; font-weight: 800; text-transform: uppercase; margin: 0 0 4px; }
+        .returns-step-body p { font-size: 13px; color: var(--color-on-surface-variant); line-height: 1.6; margin: 0; }
+        .returns-eligibility { border: 3px solid var(--color-on-surface); padding: 24px; margin-top: 16px; }
+        .returns-eligibility h3 { font-size: 13px; font-weight: 900; text-transform: uppercase; margin: 0 0 12px; }
+        .returns-yes-no { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .returns-yes ul, .returns-no ul { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+        .returns-yes h4, .returns-no h4 { font-size: 12px; font-weight: 800; text-transform: uppercase; margin: 0; }
+        .returns-yes h4 { color: #007a3d; }
+        .returns-no h4 { color: var(--color-tertiary); }
+        .returns-yes li, .returns-no li { font-size: 13px; color: var(--color-on-surface-variant); line-height: 1.5; padding-left: 16px; position: relative; }
+        .returns-yes li::before { content: '✓'; position: absolute; left: 0; color: #007a3d; font-weight: 700; }
+        .returns-no li::before { content: '✗'; position: absolute; left: 0; color: var(--color-tertiary); font-weight: 700; }
+        @media (max-width: 600px) { .info-page { padding: 40px 16px 72px; } .returns-yes-no { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <%- include('partials/navbar', { page: '' }) %>
+
+    <main>
+        <div class="info-page">
+            <span class="info-hero-tag">RETURNS & EXCHANGES</span>
+            <h1 class="info-page-title">7-day easy return.<br>No argument.</h1>
+            <p class="info-page-lead">We grade every piece honestly before listing. If something doesn't match its condition report when it arrives, we make it right. Simple as that.</p>
+
+            <div class="returns-section">
+                <h2 class="returns-section-title">The policy</h2>
+                <p>You have <strong>7 days from delivery</strong> to request a return. All we ask is that the piece is in the same condition it was when we sent it — unworn, unaltered, with any original tags still attached if they were present.</p>
+                <p>We do not accept returns for change-of-mind on items where the grade and condition were clearly described. We do accept returns for any item that does not match its listed condition report — that's our guarantee.</p>
+            </div>
+
+            <div class="returns-section">
+                <h2 class="returns-section-title">What's eligible</h2>
+                <div class="returns-eligibility">
+                    <h3>Return eligibility</h3>
+                    <div class="returns-yes-no">
+                        <div class="returns-yes">
+                            <h4>✓ Eligible</h4>
+                            <ul>
+                                <li>Item does not match its condition report</li>
+                                <li>Item arrived damaged beyond graded condition</li>
+                                <li>Wrong item sent</li>
+                                <li>Significant sizing discrepancy from listing</li>
+                            </ul>
+                        </div>
+                        <div class="returns-no">
+                            <h4>✗ Not Eligible</h4>
+                            <ul>
+                                <li>Change of mind after purchase</li>
+                                <li>Flaws accurately described in the listing</li>
+                                <li>Item worn, washed, or altered after delivery</li>
+                                <li>Request made after 7 days of delivery</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="returns-section">
+                <h2 class="returns-section-title">How to return</h2>
+                <ol class="returns-steps">
+                    <li class="returns-step">
+                        <span class="returns-step-num">01</span>
+                        <div class="returns-step-body">
+                            <h3>Contact us first</h3>
+                            <p>Message us on WhatsApp or email hello@rerunway.in with your order details and a photo of the issue. We'll confirm eligibility within one business day.</p>
+                        </div>
+                    </li>
+                    <li class="returns-step">
+                        <span class="returns-step-num">02</span>
+                        <div class="returns-step-body">
+                            <h3>Ship it back</h3>
+                            <p>We'll provide a return address. Pack the item securely in its original packaging if possible. Use a tracked service — we can't accept liability for items lost in return transit.</p>
+                        </div>
+                    </li>
+                    <li class="returns-step">
+                        <span class="returns-step-num">03</span>
+                        <div class="returns-step-body">
+                            <h3>Refund or exchange</h3>
+                            <p>Once we receive and inspect the item (typically 1–2 business days), we'll process a full refund to your original payment method or arrange an exchange — your choice.</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="returns-section">
+                <h2 class="returns-section-title">Exchanges</h2>
+                <p>We don't hold stock for exchanges — items are one-of-a-kind surplus pieces and may sell while yours is in transit back. If you want to exchange, we'll refund you on receipt of the return and you can re-order. If you'd prefer to wait and we can hold something for you, message us and we'll see what we can do.</p>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer', { page: '' }) %>
+    <script src="/js/index.js"></script>
+    <script src="/js/partials/navbar.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart — Re-Runway</title>
+    <meta name="description" content="Review your Re-Runway cart and checkout via WhatsApp. Verified deadstock and export surplus streetwear.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/global/global.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/partials.css">
+</head>
+<body>
+    <%- include('partials/navbar', { page: 'cart' }) %>
+
+<main class="cart-page">
+
+    <p class="pdp-crumb">HOME <span>/</span> CART</p>
+    <h1 class="cat-title cart-title">YOUR CART <span class="cart-count" id="cart-count">(0 ITEMS)</span></h1>
+
+    <p class="cat-loading" id="cart-loading">Loading your cart…</p>
+
+    <div class="cart-layout" id="cart-layout" hidden>
+
+        <section class="cart-items" id="cart-items">
+
+            <div class="cart-continue">
+                <a href="/catalogue" class="cart-continue-link">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    CONTINUE SHOPPING
+                </a>
+            </div>
+
+        </section>
+
+        <aside class="cart-summary neo-shadow_blk">
+            <h2>ORDER SUMMARY</h2>
+
+
+            <div class="cart-summary-rows">
+                <div class="cart-summary-row">
+                    <span>Subtotal (<span id="cart-summary-count">0</span> items)</span>
+                    <span id="cart-summary-subtotal">₹0</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span>Shipping</span>
+                    <span class="cart-summary-free">FREE</span>
+                </div>
+                <div class="cart-summary-row cart-summary-discount">
+                    <span>Discount</span>
+                    <span id="cart-summary-discount">− ₹0</span>
+                </div>
+            </div>
+
+            <div class="cart-summary-total">
+                <span>TOTAL</span>
+                <span id="cart-summary-total">₹0</span>
+            </div>
+
+            <button class="cart-btn cart-checkout-btn neo-shadow_blk" id="checkout-btn">
+                <span>CHECKOUT VIA WHATSAPP</span>
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+            <p class="whatsapp-note">We’ll open WhatsApp with your order summary ready to send.</p>
+
+            <div class="cart-summary-trust">
+                <div class="pdp-trust-item">
+                    <span class="material-symbols-outlined">verified_user</span>
+                    <span>All items authenticated</span>
+                </div>
+                <div class="pdp-trust-item">
+                    <span class="material-symbols-outlined">replay</span>
+                    <span>7-day easy return</span>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <section class="cart-empty" id="cart-empty" hidden>
+        <span class="material-symbols-outlined cart-empty-icon">shopping_bag</span>
+        <h2>YOUR CART IS EMPTY</h2>
+        <p>Nothing in here yet — go find something worth grabbing.</p>
+        <a href="/catalogue" class="cart-btn neo-shadow_blk">
+            <span>BROWSE THE CATALOG</span>
+        </a>
+    </section>
+
+</main>
+
+
+<script>
+    window.whatsappNumber = <%- JSON.stringify(whatsappNumber || '+919876543210') %>;
+    window.customerName = <%- JSON.stringify(user ? user.name : 'Guest') %>;
+</script>
+<script src="/js/index.js"></script>
+<script type="module" src="/js/cart.js"></script>
+<script src="/js/partials/navbar.js"></script>
+</body>
+</html>

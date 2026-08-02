@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page Not Found | Re-Runway</title>
+    <meta name="description" content="Sorry, we couldn't find that page. Browse Re-Runway's catalogue of verified deadstock and export surplus streetwear.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/global/global.css">
+    <link rel="stylesheet" href="/css/partials.css">
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 24px;
+            background-color: var(--color-background);
+        }
+        .error-code {
+            font-size: clamp(80px, 18vw, 160px);
+            font-weight: 900;
+            line-height: 1;
+            color: var(--color-primary);
+            margin: 0 0 8px;
+            text-shadow: 6px 6px 0px #000;
+        }
+        .error-tag {
+            display: inline-block;
+            background-color: var(--color-on-surface);
+            color: var(--color-surface);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            padding: 4px 12px;
+            margin-bottom: 24px;
+        }
+        .error-title {
+            font-size: clamp(20px, 4vw, 32px);
+            font-weight: 900;
+            text-transform: uppercase;
+            margin: 0 0 16px;
+            max-width: 520px;
+        }
+        .error-sub {
+            font-size: 15px;
+            color: var(--color-on-surface-variant);
+            margin: 0 0 40px;
+            max-width: 400px;
+            line-height: 1.7;
+        }
+        .error-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .error-link-plain {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 14px 24px;
+            border: 3px solid var(--color-on-surface);
+            color: var(--color-on-surface);
+            transition: background-color 150ms, color 150ms;
+        }
+        .error-link-plain:hover {
+            background-color: var(--color-on-surface);
+            color: var(--color-surface);
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/navbar', { page: '' }) %>
+
+    <main class="error-page">
+        <p class="error-tag"><%= typeof is500 !== 'undefined' && is500 ? 'SERVER ERROR' : 'PAGE NOT FOUND' %></p>
+        <h1 class="error-code"><%= typeof is500 !== 'undefined' && is500 ? '500' : '404' %></h1>
+        <h2 class="error-title"><%= typeof is500 !== 'undefined' && is500 ? 'Something went wrong on our end.' : 'This page took a wrong turn.' %></h2>
+        <p class="error-sub"><%= typeof is500 !== 'undefined' && is500 ? 'We hit an unexpected error. Try refreshing, or head back to the catalogue.' : "The piece you're looking for isn't here — it may have sold out or the URL might be off." %></p>
+        <div class="error-actions">
+            <a href="/catalogue" class="cart-btn neo-shadow_blk">
+                <span>BROWSE CATALOGUE</span>
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+            <a href="/" class="error-link-plain">GO HOME</a>
+        </div>
+    </main>
+
+    <script src="/js/partials/navbar.js"></script>
+</body>
+</html>

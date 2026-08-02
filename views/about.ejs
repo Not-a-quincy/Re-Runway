@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Re-Runway — Verified Deadstock & Export Surplus Streetwear</title>
+    <meta name="description" content="Learn how Re-Runway sources deadstock and export surplus from trusted brands and Tokyo partners, and how every piece is hand-graded before listing.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/global/global.css">
+    <link rel="stylesheet" href="/css/partials.css">
+    <style>
+        .info-page { max-width: 780px; margin: 0 auto; padding: 64px 24px 96px; }
+        .info-page-hero { margin-bottom: 56px; }
+        .info-hero-tag { display: inline-block; background-color: var(--color-on-surface); color: var(--color-surface); font-size: 11px; font-weight: 800; letter-spacing: 0.12em; padding: 4px 12px; margin-bottom: 20px; }
+        .info-page-title { font-size: clamp(32px, 6vw, 60px); font-weight: 900; text-transform: uppercase; line-height: 1.05; margin: 0 0 20px; }
+        .info-page-lead { font-size: 18px; color: var(--color-on-surface-variant); line-height: 1.75; margin: 0; max-width: 620px; }
+        .info-section { margin-bottom: 56px; }
+        .info-section-title { font-size: 22px; font-weight: 900; text-transform: uppercase; margin: 0 0 16px; padding-bottom: 12px; border-bottom: 3px solid var(--color-on-surface); }
+        .info-section p { font-size: 15px; line-height: 1.85; color: var(--color-on-surface-variant); margin: 0 0 16px; }
+        .info-section p:last-child { margin-bottom: 0; }
+        .info-pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 24px; }
+        .info-pillar { border: 3px solid var(--color-on-surface); padding: 24px; background: var(--color-surface-container-low); }
+        .info-pillar-icon { font-size: 32px; margin-bottom: 12px; color: var(--color-primary); }
+        .info-pillar h3 { font-size: 14px; font-weight: 900; text-transform: uppercase; margin: 0 0 8px; }
+        .info-pillar p { font-size: 13px; color: var(--color-on-surface-variant); line-height: 1.65; margin: 0; }
+        .info-stamp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 24px; }
+        .info-stamp { border: 3px solid var(--color-on-surface); padding: 20px; text-align: center; }
+        .info-stamp-mark { display: block; font-size: 36px; font-weight: 900; color: var(--color-primary); line-height: 1; margin-bottom: 8px; }
+        .info-stamp h3 { font-size: 12px; font-weight: 800; text-transform: uppercase; margin: 0 0 6px; }
+        .info-stamp p { font-size: 12px; color: var(--color-on-surface-variant); line-height: 1.5; margin: 0; }
+        @media (max-width: 600px) { .info-page { padding: 40px 16px 72px; } }
+    </style>
+</head>
+<body>
+    <%- include('partials/navbar', { page: '' }) %>
+
+    <main>
+        <div class="info-page">
+            <div class="info-page-hero">
+                <span class="info-hero-tag">ABOUT US</span>
+                <h1 class="info-page-title">We source it.<br>We grade it.<br>You wear it.</h1>
+                <p class="info-page-lead">Re-Runway is a curated streetwear destination for deadstock and export surplus — pieces that never made it to retail, priced honestly and shipped fast.</p>
+            </div>
+
+            <div class="info-section">
+                <h2 class="info-section-title">Where we source from</h2>
+                <p>Every piece on Re-Runway comes from one of two places: brand deadstock bought directly from the labels themselves, or export surplus sourced from trusted overseas partners — primarily in Tokyo, where relationships with long-standing distributors give us access to pieces you simply won't find on the high street.</p>
+                <p>We don't buy blind lots. Every batch is reviewed before purchase, and anything that doesn't meet our standards never gets listed.</p>
+                <div class="info-pillar-grid">
+                    <div class="info-pillar">
+                        <span class="material-symbols-outlined info-pillar-icon">inventory_2</span>
+                        <h3>Brand Deadstock</h3>
+                        <p>Surplus stock sourced directly from labels — unsold pieces that never reached a retail shelf.</p>
+                    </div>
+                    <div class="info-pillar">
+                        <span class="material-symbols-outlined info-pillar-icon">flight</span>
+                        <h3>Tokyo Exclusives</h3>
+                        <p>Export surplus from trusted Tokyo partners — brands like Visvim, Kapital, and Needles that are hard to find elsewhere.</p>
+                    </div>
+                    <div class="info-pillar">
+                        <span class="material-symbols-outlined info-pillar-icon">sell</span>
+                        <h3>Steal Deals</h3>
+                        <p>Grade B and C pieces with factory flaws — fully wearable, steeply discounted, honest about why.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section" id="authentication">
+                <h2 class="info-section-title">How we grade every piece</h2>
+                <p>Deadstock and surplus stock sometimes carries small factory imperfections — often the exact reason a piece never made it to a retail shelf at full price. We inspect every item by hand and grade it honestly before listing, so what you see is exactly what ships.</p>
+                <div class="info-stamp-grid">
+                    <div class="info-stamp">
+                        <span class="info-stamp-mark">S</span>
+                        <h3>Flawless</h3>
+                        <p>Zero visible flaws. Indistinguishable from a retail rack.</p>
+                    </div>
+                    <div class="info-stamp">
+                        <span class="info-stamp-mark">A</span>
+                        <h3>Micro Flaw</h3>
+                        <p>A barely-there imperfection you'd have to hunt for.</p>
+                    </div>
+                    <div class="info-stamp">
+                        <span class="info-stamp-mark">B</span>
+                        <h3>Visible Flaw</h3>
+                        <p>A noticeable but minor cosmetic flaw. Fully wearable, priced for it.</p>
+                    </div>
+                    <div class="info-stamp">
+                        <span class="info-stamp-mark">C</span>
+                        <h3>Overrun Flaw</h3>
+                        <p>The kind of flaw that kept it off shelves. Steepest discount.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2 class="info-section-title">The Re-Runway promise</h2>
+                <p>No mystery stock. No knockoffs. No inflated retail theatre. Just verified pieces at honest prices, graded transparently, and shipped with care. If something doesn't match its condition report when it arrives, send it back — no argument.</p>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer', { page: '' }) %>
+    <script src="/js/index.js"></script>
+    <script src="/js/partials/navbar.js"></script>
+</body>
+</html>

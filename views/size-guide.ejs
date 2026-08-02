@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Size Guide — Re-Runway</title>
+    <meta name="description" content="Find your fit with Re-Runway's size guide. Chest, waist, and length measurements for tops, bottoms, and footwear in S–XXL.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/global/global.css">
+    <link rel="stylesheet" href="/css/partials.css">
+    <style>
+        .info-page { max-width: 860px; margin: 0 auto; padding: 64px 24px 96px; }
+        .info-hero-tag { display: inline-block; background-color: var(--color-on-surface); color: var(--color-surface); font-size: 11px; font-weight: 800; letter-spacing: 0.12em; padding: 4px 12px; margin-bottom: 20px; }
+        .info-page-title { font-size: clamp(32px, 6vw, 56px); font-weight: 900; text-transform: uppercase; line-height: 1.05; margin: 0 0 16px; }
+        .info-page-lead { font-size: 15px; color: var(--color-on-surface-variant); line-height: 1.75; margin: 0 0 48px; max-width: 560px; }
+        .guide-section { margin-bottom: 48px; }
+        .guide-section-title { font-size: 16px; font-weight: 900; text-transform: uppercase; margin: 0 0 16px; padding-bottom: 10px; border-bottom: 3px solid var(--color-on-surface); }
+        .guide-table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background-color: var(--color-on-surface); color: var(--color-surface); font-size: 11px; font-weight: 800; letter-spacing: 0.08em; padding: 12px 16px; text-align: left; }
+        td { padding: 12px 16px; border-bottom: 2px solid var(--color-surface-container); }
+        tr:last-child td { border-bottom: none; }
+        tr:nth-child(even) td { background-color: var(--color-surface-container-low); }
+        .guide-note { margin-top: 48px; padding: 24px; border: 3px solid var(--color-surface-container); background: var(--color-surface-container-low); font-size: 13px; color: var(--color-on-surface-variant); line-height: 1.7; }
+        .guide-note strong { color: var(--color-on-surface); }
+        @media (max-width: 600px) { .info-page { padding: 40px 16px 72px; } td, th { padding: 10px 12px; } }
+    </style>
+</head>
+<body>
+    <%- include('partials/navbar', { page: '' }) %>
+
+    <main>
+        <div class="info-page">
+            <span class="info-hero-tag">SIZE GUIDE</span>
+            <h1 class="info-page-title">Find your fit.</h1>
+            <p class="info-page-lead">All measurements are in centimetres. If you're between sizes, we recommend sizing up — surplus and deadstock pieces can run vintage, which typically means slimmer and shorter than modern sizing.</p>
+
+            <div class="guide-section">
+                <h2 class="guide-section-title">Tops & Outerwear</h2>
+                <div class="guide-table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Size</th>
+                                <th>Chest (cm)</th>
+                                <th>Shoulder (cm)</th>
+                                <th>Length (cm)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>XS</td><td>84–88</td><td>42–43</td><td>66–68</td></tr>
+                            <tr><td>S</td><td>88–94</td><td>43–45</td><td>68–71</td></tr>
+                            <tr><td>M</td><td>94–100</td><td>45–47</td><td>71–74</td></tr>
+                            <tr><td>L</td><td>100–108</td><td>47–49</td><td>74–77</td></tr>
+                            <tr><td>XL</td><td>108–116</td><td>49–52</td><td>77–80</td></tr>
+                            <tr><td>XXL</td><td>116–124</td><td>52–55</td><td>80–84</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h2 class="guide-section-title">Bottoms & Denim</h2>
+                <div class="guide-table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Size (Waist)</th>
+                                <th>Waist (cm)</th>
+                                <th>Hip (cm)</th>
+                                <th>Inseam (cm)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>28</td><td>71–73</td><td>90–93</td><td>76–78</td></tr>
+                            <tr><td>30</td><td>76–78</td><td>95–98</td><td>78–80</td></tr>
+                            <tr><td>32</td><td>81–83</td><td>100–103</td><td>79–81</td></tr>
+                            <tr><td>34</td><td>86–88</td><td>105–108</td><td>80–82</td></tr>
+                            <tr><td>36</td><td>91–93</td><td>110–113</td><td>81–83</td></tr>
+                            <tr><td>38</td><td>97–99</td><td>116–119</td><td>82–84</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h2 class="guide-section-title">Footwear (UK Sizing)</h2>
+                <div class="guide-table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>UK Size</th>
+                                <th>EU Size</th>
+                                <th>US Size (Men's)</th>
+                                <th>Foot Length (cm)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>UK 6</td><td>39</td><td>7</td><td>24.5</td></tr>
+                            <tr><td>UK 7</td><td>40–41</td><td>8</td><td>25.4</td></tr>
+                            <tr><td>UK 8</td><td>42</td><td>9</td><td>26.3</td></tr>
+                            <tr><td>UK 9</td><td>43</td><td>10</td><td>27.1</td></tr>
+                            <tr><td>UK 10</td><td>44–45</td><td>11</td><td>28.0</td></tr>
+                            <tr><td>UK 11</td><td>46</td><td>12</td><td>28.9</td></tr>
+                            <tr><td>UK 12</td><td>47</td><td>13</td><td>29.8</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="guide-note">
+                <strong>A note on vintage sizing:</strong> Deadstock and export surplus pieces often follow the sizing conventions of the decade they were made. Japanese brands (Visvim, Kapital, Needles) generally run one size smaller than Western equivalents — a Japanese L is closer to a Western M. We note this in individual listings where relevant.
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer', { page: '' }) %>
+    <script src="/js/index.js"></script>
+    <script src="/js/partials/navbar.js"></script>
+</body>
+</html>

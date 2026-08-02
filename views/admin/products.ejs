@@ -1,0 +1,156 @@
+<%- include('partials/header', { section, pageTitle: 'Products' }) %>
+
+    <div class="admin-header-row">
+        <div>
+            <h1 class="admin-title">PRODUCTS</h1>
+            <p class="admin-subtitle">Add, edit, and manage stock for every listing.</p>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <input type="text" class="admin-search" id="product-search" placeholder="Search brand or name…">
+            <button class="admin-btn admin-btn-primary" id="add-product-btn">
+                <span class="material-symbols-outlined" style="font-size:18px;">add</span> ADD PRODUCT
+            </button>
+        </div>
+    </div>
+
+    <div id="products-loading" class="admin-loading">Loading products…</div>
+
+    <div class="admin-table-wrap" id="products-table-wrap" hidden>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Grade</th>
+                    <th>Stock</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="products-table-body"></tbody>
+        </table>
+    </div>
+
+    <!-- Add / Edit Product Modal -->
+    <div class="admin-modal-scrim" id="product-modal-scrim">
+        <div class="admin-modal">
+            <div class="admin-modal-head">
+                <h2 id="product-modal-title">ADD PRODUCT</h2>
+                <button class="admin-modal-close" id="product-modal-close" aria-label="Close">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <p class="admin-form-error" id="product-form-error"></p>
+
+            <form id="product-form">
+                <input type="hidden" id="product-id">
+
+                <div class="admin-form-row two-col">
+                    <div>
+                        <label>BRAND</label>
+                        <input type="text" id="product-brand" required>
+                    </div>
+                    <div>
+                        <label>NAME</label>
+                        <input type="text" id="product-name" required>
+                    </div>
+                </div>
+
+                <div class="admin-form-row two-col">
+                    <div>
+                        <label>CATEGORY</label>
+                        <select id="product-category" required>
+                            <option value="Outerwear">Outerwear</option>
+                            <option value="Denim">Denim</option>
+                            <option value="Knitwear">Knitwear</option>
+                            <option value="Footwear">Footwear</option>
+                            <option value="Accessories">Accessories</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>GRADE</label>
+                        <select id="product-grade" required>
+                            <option value="S">S — Flawless</option>
+                            <option value="A">A — Micro flaw</option>
+                            <option value="B">B — Visible flaw</option>
+                            <option value="C">C — Overrun flaw</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="admin-form-row two-col">
+                    <div>
+                        <label>PRICE (₹)</label>
+                        <input type="number" id="product-price" min="0" step="1" required>
+                    </div>
+                    <div>
+                        <label>ORIGINAL PRICE (₹, optional)</label>
+                        <input type="number" id="product-original-price" min="0" step="1">
+                    </div>
+                </div>
+
+                <div class="admin-form-row two-col">
+                    <div>
+                        <label>SOURCE (optional)</label>
+                        <select id="product-source">
+                            <option value="">— None —</option>
+                            <option value="Tokyo Exclusive">Tokyo Exclusive</option>
+                            <option value="Vault Archive">Vault Archive</option>
+                            <option value="Steal Deal">Steal Deal</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>STOCK QUANTITY</label>
+                        <input type="number" id="product-stock" min="0" step="1" required>
+                    </div>
+                </div>
+
+                <div class="admin-checkbox-row" style="margin-bottom:14px;">
+                    <input type="checkbox" id="product-verified">
+                    <label for="product-verified" style="margin:0;">AUTHENTICATED / VERIFIED</label>
+                </div>
+
+                <div class="admin-form-row">
+                    <label>CONDITION NOTES</label>
+                    <textarea id="product-condition-notes"></textarea>
+                </div>
+                <div class="admin-form-row">
+                    <label>MATERIAL &amp; CARE</label>
+                    <textarea id="product-material-care"></textarea>
+                </div>
+                <div class="admin-form-row">
+                    <label>SELLER NOTES</label>
+                    <textarea id="product-seller-notes"></textarea>
+                </div>
+
+                <div class="admin-form-actions">
+                    <button type="button" class="admin-btn" id="product-cancel-btn">CANCEL</button>
+                    <button type="submit" class="admin-btn admin-btn-primary" id="product-save-btn">SAVE PRODUCT</button>
+                </div>
+            </form>
+
+            <!-- Images & sizes — only usable once the product exists -->
+            <div id="product-extras" hidden>
+                <hr style="margin:20px 0; border:none; border-top:2px solid var(--color-surface-container);">
+
+                <h2 style="font-size:14px;">IMAGES</h2>
+                <div class="admin-inline-list" id="product-images-list"></div>
+                <div class="admin-add-row" style="margin-bottom:20px;">
+                    <input type="text" id="product-image-url-input" placeholder="Image URL…">
+                    <button type="button" class="admin-btn admin-btn-sm" id="product-add-image-btn">ADD</button>
+                </div>
+
+                <h2 style="font-size:14px;">SIZES</h2>
+                <div class="admin-inline-list" id="product-sizes-list"></div>
+                <div class="admin-add-row">
+                    <input type="text" id="product-size-input" placeholder="e.g. M, UK 9, 32…">
+                    <button type="button" class="admin-btn admin-btn-sm" id="product-add-size-btn">ADD</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<%- include('partials/footer', { pageScript: '/js/admin/products.js' }) %>

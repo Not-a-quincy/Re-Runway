@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Re-Runway — Get in Touch</title>
+    <meta name="description" content="Have a question about an order, a piece, or want to sell with us? Get in touch with Re-Runway via WhatsApp or email.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/global/global.css">
+    <link rel="stylesheet" href="/css/partials.css">
+    <style>
+        .info-page { max-width: 780px; margin: 0 auto; padding: 64px 24px 96px; }
+        .info-hero-tag { display: inline-block; background-color: var(--color-on-surface); color: var(--color-surface); font-size: 11px; font-weight: 800; letter-spacing: 0.12em; padding: 4px 12px; margin-bottom: 20px; }
+        .info-page-title { font-size: clamp(32px, 6vw, 60px); font-weight: 900; text-transform: uppercase; line-height: 1.05; margin: 0 0 20px; }
+        .info-page-lead { font-size: 18px; color: var(--color-on-surface-variant); line-height: 1.75; margin: 0 0 56px; max-width: 560px; }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .contact-card { border: 3px solid var(--color-on-surface); padding: 32px; background: var(--color-surface-container-low); }
+        .contact-card-icon { font-size: 36px; color: var(--color-primary); margin-bottom: 16px; }
+        .contact-card h2 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin: 0 0 10px; }
+        .contact-card p { font-size: 14px; color: var(--color-on-surface-variant); line-height: 1.7; margin: 0 0 24px; }
+        .contact-card .cart-btn { display: inline-flex; font-size: 13px; padding: 12px 20px; }
+        .contact-note { margin-top: 48px; padding: 24px; border: 3px solid var(--color-surface-container); background: var(--color-surface-container-low); }
+        .contact-note h3 { font-size: 13px; font-weight: 900; text-transform: uppercase; margin: 0 0 10px; }
+        .contact-note p { font-size: 13px; color: var(--color-on-surface-variant); line-height: 1.7; margin: 0; }
+        @media (max-width: 600px) { .info-page { padding: 40px 16px 72px; } }
+    </style>
+</head>
+<body>
+    <%- include('partials/navbar', { page: '' }) %>
+
+    <main>
+        <div class="info-page">
+            <span class="info-hero-tag">GET IN TOUCH</span>
+            <h1 class="info-page-title">We're here.<br>Say something.</h1>
+            <p class="info-page-lead">Questions about an order, a piece you spotted, or wanting to sell with us — we're reachable directly. No bots, no ticket queues.</p>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <span class="material-symbols-outlined contact-card-icon">chat</span>
+                    <h2>WhatsApp</h2>
+                    <p>Fastest way to reach us. Send a message and we'll get back to you within a few hours during business hours.</p>
+                    <a href="https://wa.me/<%= (whatsappNumber || '').replace(/[^\d]/g, '') %>" target="_blank" rel="noopener noreferrer" class="cart-btn neo-shadow_blk">
+                        <span>MESSAGE US</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </div>
+                <div class="contact-card">
+                    <span class="material-symbols-outlined contact-card-icon">mail</span>
+                    <h2>Email</h2>
+                    <p>For longer questions, order issues, or collaboration inquiries. We aim to reply within one business day.</p>
+                    <a href="mailto:hello@rerunway.in" class="cart-btn neo-shadow_blk">
+                        <span>SEND EMAIL</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </div>
+                <div class="contact-card">
+                    <span class="material-symbols-outlined contact-card-icon">sell</span>
+                    <h2>Sell With Us</h2>
+                    <p>Have deadstock or surplus pieces you want to move? We're always looking for quality stock from trusted sources.</p>
+                    <a href="mailto:supply@rerunway.in" class="cart-btn neo-shadow_blk">
+                        <span>GET IN TOUCH</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-note">
+                <h3>Response Times</h3>
+                <p>WhatsApp: typically within 2–4 hours on weekdays, next morning on weekends. Email: within 1 business day. We don't have a 24/7 support team — we're a small operation and we're honest about that.</p>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer', { page: '' }) %>
+    <script src="/js/index.js"></script>
+    <script src="/js/partials/navbar.js"></script>
+</body>
+</html>

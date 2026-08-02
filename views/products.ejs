@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pdp-page-title">Product — Re-Runway</title>
+    <meta name="description" content="Shop verified deadstock and export surplus streetwear on Re-Runway. Every piece graded honestly before listing." id="pdp-meta-description">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/catalogue.css">
+    <link rel="stylesheet" href="/css/products.css">
+    <link rel="stylesheet" href="/css/global/global.css">
+    <link rel="stylesheet" href="/css/partials.css">
+</head>
+<body>
+    <!--navbar-->
+    <%- include('partials/navbar', { page: 'home' }) %>
+
+<main class="pdp">
+
+    <p class="pdp-crumb" id="pdp-crumb">HOME <span>/</span> CATALOG <span>/</span> <span id="pdp-crumb-current">LOADING...</span></p>
+
+    <div id="pdp-loading" class="cat-loading">Loading this piece…</div>
+
+    <div id="pdp-content" hidden>
+
+    <section class="pdp-main">
+
+        <div class="pdp-gallery">
+            <div class="pdp-main-image neo-shadow_blk">
+                <img src="https://placehold.co/700x800/eeeeee/1b1b1b?text=IMG" alt="" id="pdp-main-img">
+                <span class="badge-verified pdp-verified-badge" id="pdp-verified-badge" hidden><span class="material-symbols-outlined">verified</span>AUTHENTIC</span>
+            </div>
+            <div class="pdp-thumbs" id="pdp-thumbs"></div>
+        </div>
+
+        <div class="pdp-info">
+            <span class="pdp-brand" id="pdp-brand"></span>
+            <h1 class="pdp-title" id="pdp-title"></h1>
+
+            <div class="pdp-price-row">
+                <span class="pdp-price" id="pdp-price"></span>
+                <span class="pdp-price-strike" id="pdp-price-strike" hidden></span>
+                <span class="pdp-discount" id="pdp-discount" hidden></span>
+            </div>
+
+            <div class="pdp-grade-block">
+                <span class="grade-badge pdp-grade-badge" id="pdp-grade-badge"></span>
+                <p class="pdp-grade-desc" id="pdp-grade-desc"></p>
+            </div>
+
+            <div class="pdp-size-block">
+                <div class="pdp-size-head">
+                    <h3>SELECT SIZE</h3>
+                    <button class="pdp-size-guide">SIZE GUIDE</button>
+                </div>
+                <div class="pill-row" id="pdp-size-row"></div>
+                <p class="pdp-stock-note" id="pdp-stock-note"></p>
+            </div>
+
+            <div class="pdp-cta-row">
+                <button class="cart-btn pdp-add-cart neo-shadow_blk" id="pdp-add-cart">
+                    <span class="material-symbols-outlined">shopping_bag</span>
+                    <span id="pdp-add-cart-label">ADD TO CART</span>
+                </button>
+                <button class="pdp-wishlist neo-shadow_blk" aria-label="Add to wishlist">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+            </div>
+            <p class="pdp-add-cart-message" id="pdp-add-cart-message" hidden></p>
+
+            <div class="pdp-trust">
+                <div class="pdp-trust-item">
+                    <span class="material-symbols-outlined">verified_user</span>
+                    <span>Authenticated by Re-Runway experts</span>
+                </div>
+                <div class="pdp-trust-item">
+                    <span class="material-symbols-outlined">local_shipping</span>
+                    <span>Ships in 2–4 days, tracked</span>
+                </div>
+                <div class="pdp-trust-item">
+                    <span class="material-symbols-outlined">replay</span>
+                    <span>7-day easy return</span>
+                </div>
+            </div>
+
+            <div class="pdp-accordion">
+                <details class="pdp-accordion-item" open>
+                    <summary>CONDITION REPORT</summary>
+                    <div class="pdp-accordion-body"><p id="pdp-condition-notes"></p></div>
+                </details>
+                <details class="pdp-accordion-item">
+                    <summary>MATERIAL &amp; CARE</summary>
+                    <div class="pdp-accordion-body"><p id="pdp-material-care"></p></div>
+                </details>
+                <details class="pdp-accordion-item">
+                    <summary>SHIPPING &amp; RETURNS</summary>
+                    <div class="pdp-accordion-body">
+                        <p>Dispatched within 2 business days. Free returns within 7 days of delivery if the item doesn't match its condition report.</p>
+                    </div>
+                </details>
+                <details class="pdp-accordion-item">
+                    <summary>SELLER NOTES</summary>
+                    <div class="pdp-accordion-body"><p id="pdp-seller-notes"></p></div>
+                </details>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="pdp-related">
+        <h2 class="cat-title pdp-related-title">YOU MIGHT ALSO LIKE</h2>
+        <div class="product-grid" id="pdp-related-grid"></div>
+    </section>
+
+    </div>
+
+</main>
+
+    <!--footer-->
+    <%- include('partials/footer', { page: 'product' }) %>
+
+<script src="/js/index.js"></script>
+<script>window.PRODUCT_ID = <%- JSON.stringify(productId) %>;</script>
+<script src="/js/product.js"></script>
+<script src="/js/partials/navbar.js"></script>
+</body>
+</html>

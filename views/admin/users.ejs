@@ -1,0 +1,27 @@
+<%- include('partials/header', { section, pageTitle: 'Users' }) %>
+
+    <div class="admin-header-row">
+        <div>
+            <h1 class="admin-title">USERS</h1>
+            <p class="admin-subtitle">Manage accounts and admin access.</p>
+        </div>
+    </div>
+
+    <div id="users-loading" class="admin-loading">Loading users…</div>
+
+    <div class="admin-table-wrap" id="users-table-wrap" hidden>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Joined</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="users-table-body"></tbody>
+        </table>
+    </div>
+
+<%- include('partials/footer', { pageScript: '/js/admin/users.js' }) %>

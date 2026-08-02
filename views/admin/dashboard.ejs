@@ -1,0 +1,42 @@
+<%- include('partials/header', { section, pageTitle: 'Dashboard' }) %>
+
+    <div class="admin-header-row">
+        <div>
+            <h1 class="admin-title">DASHBOARD</h1>
+            <p class="admin-subtitle">A quick look at how the store's doing.</p>
+        </div>
+    </div>
+
+    <div id="dashboard-loading" class="admin-loading">Loading dashboard…</div>
+
+    <div id="dashboard-content" hidden>
+
+        <div class="admin-stats-grid" id="stats-grid"></div>
+
+        <div class="admin-panel">
+            <h2>RECENTLY ADDED PRODUCTS</h2>
+            <div class="admin-table-wrap">
+                <table class="admin-table">
+                    <thead>
+                        <tr><th>Product</th><th>Price</th><th>Stock</th><th>Added</th></tr>
+                    </thead>
+                    <tbody id="recent-products-body"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="admin-panel">
+            <h2>RECENTLY JOINED USERS</h2>
+            <div class="admin-table-wrap">
+                <table class="admin-table">
+                    <thead>
+                        <tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th></tr>
+                    </thead>
+                    <tbody id="recent-users-body"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+<%- include('partials/footer', { pageScript: '/js/admin/dashboard.js' }) %>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account — Re-Runway</title>
+    <meta name="description" content="Create a Re-Runway account to get first access to new drops, exclusive streetwear, and steal deals.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/global/global.css">
+    <link rel="stylesheet" href="/css/partials.css">
+</head>
+<body>
+
+<main class="auth-page">
+
+    <section class="auth-panel">
+        <a href="/" class="logo auth-logo">Re-Runway</a>
+        <div class="auth-panel-copy">
+            <span class="hero-tag">MEMBERS GET FIRST PICK</span>
+            <h1 class="auth-panel-title">EVERY DROP<br>STARTS HERE</h1>
+            <p class="auth-panel-sub">Track orders, save pieces to your Vault, and get early access before anyone else.</p>
+        </div>
+        <div class="auth-panel-stripe">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+    </section>
+
+    <section class="auth-form-side">
+        <div class="auth-form-wrap">
+
+            <a href="/" class="logo auth-logo-mobile">Re-Runway</a>
+
+            <h2 class="auth-title">CREATE ACCOUNT</h2>
+            <p class="auth-subtitle">Already have one? <a href="/login" class="auth-inline-link">Log in</a></p>
+
+            <p class="auth-form-error" id="signup-form-error" hidden></p>
+
+            <form class="auth-form" id="signup-form" novalidate>
+
+                <label class="auth-field">
+                    <span class="auth-label">NAME</span>
+                    <input class="auth-input" type="text" name="name" placeholder="Your name" autocomplete="name" required>
+                    <span class="auth-error" data-error-for="name">Enter your name.</span>
+                </label>
+
+                <label class="auth-field">
+                    <span class="auth-label">EMAIL</span>
+                    <input class="auth-input" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+                    <span class="auth-error" data-error-for="email">Enter a valid email address.</span>
+                </label>
+
+                <label class="auth-field">
+                    <span class="auth-label">PASSWORD</span>
+                    <div class="auth-password-wrap">
+                        <input class="auth-input" type="password" name="password" placeholder="••••••••" autocomplete="new-password" required minlength="8" id="signup-password">
+                        <button type="button" class="auth-password-toggle" id="password-toggle" aria-label="Show password">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                    </div>
+                    <span class="auth-error" data-error-for="password">Password must be at least 8 characters.</span>
+                </label>
+
+                <button type="submit" class="cart-btn neo-shadow_blk auth-submit">
+                    <span>CREATE ACCOUNT</span>
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+
+            </form>
+
+            <p class="auth-terms">
+                By continuing you agree to Re-Runway's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+            </p>
+
+        </div>
+    </section>
+
+</main>
+
+<script src="/js/signup.js"></script>
+</body>
+</html>

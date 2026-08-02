@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Re_Runway Admin — <%= typeof pageTitle !== 'undefined' ? pageTitle : 'Dashboard' %></title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/global/global.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin-body" data-current-user-id="<%= typeof user !== 'undefined' && user ? user.id : '' %>">
+
+<div class="admin-shell">
+
+    <aside class="admin-sidebar">
+        <a href="/" class="logo admin-logo">Re-Runway</a>
+        <span class="admin-badge">ADMIN</span>
+
+        <nav class="admin-nav">
+            <a href="/admin" class="admin-nav-link <%= section === 'dashboard' ? 'active' : '' %>">
+                <span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+            <a href="/admin/products" class="admin-nav-link <%= section === 'products' ? 'active' : '' %>">
+                <span class="material-symbols-outlined">inventory_2</span> Products
+            </a>
+            <a href="/admin/banners" class="admin-nav-link <%= section === 'banners' ? 'active' : '' %>">
+                <span class="material-symbols-outlined">view_carousel</span> Banners
+            </a>
+            <a href="/admin/users" class="admin-nav-link <%= section === 'users' ? 'active' : '' %>">
+                <span class="material-symbols-outlined">group</span> Users
+            </a>
+        </nav>
+
+        <div class="admin-sidebar-footer">
+            <a href="/" class="admin-nav-link">
+                <span class="material-symbols-outlined">storefront</span> Back to store
+            </a>
+            <form action="/logout" method="POST">
+                <button type="submit" class="admin-nav-link admin-logout-btn">
+                    <span class="material-symbols-outlined">logout</span> Log out
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <main class="admin-main">

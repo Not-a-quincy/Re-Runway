@@ -1,0 +1,77 @@
+<%- include('partials/header', { section, pageTitle: 'Banners' }) %>
+
+    <div class="admin-header-row">
+        <div>
+            <h1 class="admin-title">BANNERS</h1>
+            <p class="admin-subtitle">Manage the hero banners shown on the homepage.</p>
+        </div>
+        <button class="admin-btn admin-btn-primary" id="add-banner-btn">
+            <span class="material-symbols-outlined" style="font-size:18px;">add</span> ADD BANNER
+        </button>
+    </div>
+
+    <div id="banners-loading" class="admin-loading">Loading banners…</div>
+
+    <div class="admin-table-wrap" id="banners-table-wrap" hidden>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Subtitle</th>
+                    <th>Order</th>
+                    <th>Active</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="banners-table-body"></tbody>
+        </table>
+    </div>
+
+    <!-- Add / Edit Banner Modal -->
+    <div class="admin-modal-scrim" id="banner-modal-scrim">
+        <div class="admin-modal">
+            <div class="admin-modal-head">
+                <h2 id="banner-modal-title">ADD BANNER</h2>
+                <button class="admin-modal-close" id="banner-modal-close" aria-label="Close">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <p class="admin-form-error" id="banner-form-error"></p>
+
+            <form id="banner-form">
+                <input type="hidden" id="banner-id">
+
+                <div class="admin-form-row">
+                    <label>TITLE</label>
+                    <input type="text" id="banner-title" required>
+                </div>
+                <div class="admin-form-row">
+                    <label>SUBTITLE (optional)</label>
+                    <input type="text" id="banner-subtitle">
+                </div>
+                <div class="admin-form-row">
+                    <label>IMAGE URL</label>
+                    <input type="text" id="banner-image-url" required>
+                </div>
+                <div class="admin-form-row two-col">
+                    <div>
+                        <label>SORT ORDER</label>
+                        <input type="number" id="banner-sort-order" value="0" step="1">
+                    </div>
+                    <div class="admin-checkbox-row" style="align-self:end; margin-bottom:10px;">
+                        <input type="checkbox" id="banner-active" checked>
+                        <label for="banner-active" style="margin:0;">ACTIVE</label>
+                    </div>
+                </div>
+
+                <div class="admin-form-actions">
+                    <button type="button" class="admin-btn" id="banner-cancel-btn">CANCEL</button>
+                    <button type="submit" class="admin-btn admin-btn-primary" id="banner-save-btn">SAVE BANNER</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<%- include('partials/footer', { pageScript: '/js/admin/banners.js' }) %>

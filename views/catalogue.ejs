@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue — Re-Runway | Shop Deadstock & Export Surplus Streetwear</title>
+    <meta name="description" content="Browse Re-Runway's full catalogue of verified deadstock and export surplus streetwear. Filter by grade, size, category, and source. New pieces added every drop.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/global/global.css">
+    <link rel="stylesheet" href="/css/partials.css">
+    <link rel="stylesheet" href="/css/catalogue.css">
+</head>
+<body>
+    <!--navbar-->
+    <%- include('partials/navbar', { page: 'catalogue' }) %>
+
+
+    <main>
+
+        <section class="cat-hero">
+            <div class="cat-hero-inner">
+                <span class="hero-tag" id="cat-item-count">LOADING...</span>
+                <h1 class="cat-title">ALL DROPS</h1>
+            </div>
+        </section>
+
+        <section class="cat-body">
+
+            <div class="cat-toolbar">
+                <button class="mobile-filter-toggle neo-shadow_blk" id="mobile-filter-toggle">
+                    <span class="material-symbols-outlined">tune</span>
+                    FILTERS
+                </button>
+                <div class="sort-select">
+                    <label for="sort">SORT BY</label>
+                    <select id="sort">
+                        <option value="newest">NEWEST DROPS</option>
+                        <option value="price_asc">PRICE: LOW TO HIGH</option>
+                        <option value="price_desc">PRICE: HIGH TO LOW</option>
+                        <option value="grade">CONDITION: BEST FIRST</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="cat-layout">
+
+                <aside class="filters neo-shadow_blk" id="filters">
+                    <div class="filter-head">
+                        <span>FILTERS</span>
+                        <button class="clear-filters" id="clear-filters">CLEAR ALL</button>
+                        <button class="filters-close" id="filters-close" aria-label="Close filters">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+
+                    <div class="filter-group" id="category-filters">
+                        <h3>CATEGORY</h3>
+                        <label class="check-row"><input type="checkbox" name="category" value="Outerwear"><span>Outerwear</span></label>
+                        <label class="check-row"><input type="checkbox" name="category" value="Denim"><span>Denim</span></label>
+                        <label class="check-row"><input type="checkbox" name="category" value="Knitwear"><span>Knitwear</span></label>
+                        <label class="check-row"><input type="checkbox" name="category" value="Footwear"><span>Footwear</span></label>
+                        <label class="check-row"><input type="checkbox" name="category" value="Accessories"><span>Accessories</span></label>
+                    </div>
+
+                    <div class="filter-group" id="size-filters">
+                        <h3>SIZE</h3>
+                        <div class="pill-row">
+                            <button type="button" class="pill" data-value="XS">XS</button>
+                            <button type="button" class="pill" data-value="S">S</button>
+                            <button type="button" class="pill" data-value="M">M</button>
+                            <button type="button" class="pill" data-value="L">L</button>
+                            <button type="button" class="pill" data-value="XL">XL</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-group" id="grade-filters">
+                        <h3>CONDITION GRADE</h3>
+                        <div class="pill-row">
+                            <button type="button" class="pill grade-pill grade-s" data-value="S">S</button>
+                            <button type="button" class="pill grade-pill grade-a" data-value="A">A</button>
+                            <button type="button" class="pill grade-pill grade-b" data-value="B">B</button>
+                            <button type="button" class="pill grade-pill grade-c" data-value="C">C</button>
+                        </div>
+                        <p class="filter-hint">S = flawless &middot; A = micro flaw &middot; B = visible flaw &middot; C = overrun flaw</p>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>PRICE</h3>
+                        <div class="price-inputs">
+                            <input type="number" placeholder="MIN" class="price-input" id="price-min">
+                            <span class="price-dash">—</span>
+                            <input type="number" placeholder="MAX" class="price-input" id="price-max">
+                        </div>
+                    </div>
+
+                    <div class="filter-group no-border" id="source-filters">
+                        <h3>SOURCE</h3>
+                        <label class="check-row"><input type="checkbox" name="source" value="Tokyo Exclusive"><span>Tokyo Exclusive 🇯🇵</span></label>
+                        <label class="check-row"><input type="checkbox" name="source" value="Vault Archive"><span>Vault Archive</span></label>
+                        <label class="check-row"><input type="checkbox" name="source" value="Steal Deal"><span>Steal Deals 🔥</span></label>
+                    </div>
+
+                    <button class="apply-filters-mobile neo-shadow_blk" id="apply-filters">SHOW ITEMS</button>
+                </aside>
+
+                           <div class="cat-main">
+
+                <div class="active-filters" id="active-filters"></div>
+
+                <div class="product-grid" id="product-grid">
+                    <p class="cat-loading" id="cat-loading">Loading pieces…</p>
+                </div>
+
+                    <button class="load-more neo-shadow_blk" id="load-more" hidden>LOAD MORE</button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+<div class="filters-scrim" id="filters-scrim"></div>
+
+<script src="/js/catalogue.js"></script>
+<script src="/js/partials/navbar.js"></script>
+
+</body>
+</html>
