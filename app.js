@@ -128,6 +128,10 @@ app.get('/admin/products', requireAdmin, (req, res) => {
   res.render('admin/products', { section: 'products' });
 });
 
+app.get('/admin/creators', requireAdmin, (req, res) => {
+  res.render('admin/creators', { section: 'creators' });
+});
+
 app.get('/admin/banners', requireAdmin, (req, res) => {
   res.render('admin/banners', { section: 'banners' });
 });

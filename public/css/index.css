@@ -548,7 +548,7 @@
 
 /* ===== Featured picks ===== */
 .featured { padding: 88px var(--margin-desktop); background-color: var(--color-surface-container-low); border-top: 3px solid var(--color-black); }
-.featured .product-grid { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); margin-bottom: 40px; }
+.featured .product-grid { margin-bottom: 40px; }
 .featured-cta { display: inline-flex; margin: 0 auto; }
 .featured > .featured-cta { display: flex; width: fit-content; }
 
@@ -640,7 +640,7 @@
 @media (min-width: 2560px) {
     .motto-inner, .grading-inner { max-width: 1800px; }
     .category-grid, .steps-row { max-width: 2000px; }
-    .featured .product-grid { max-width: 2200px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+    .featured .product-grid { max-width: 2200px; }
     .motto, .categories, .how-it-works, .featured, .final-cta, .grading {
         padding-left: 160px;
         padding-right: 160px;

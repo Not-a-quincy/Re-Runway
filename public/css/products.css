@@ -160,8 +160,45 @@
 .pdp-accordion-body { padding: 0 0 16px; font-size: 13px; line-height: 1.6; color: var(--color-on-surface-variant); }
 .pdp-accordion-body p { margin: 0; }
 
+/* ===== Creator ===== */
+.pdp-creator {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 56px;
+    padding: 20px;
+    background-color: var(--color-white);
+    border: 3px solid var(--color-black);
+}
+.pdp-creator-photo {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-black);
+    flex-shrink: 0;
+}
+.pdp-creator-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--color-on-surface-variant);
+}
+.pdp-creator-name { font-size: 17px; margin: 2px 0 2px; }
+.pdp-creator-meta { font-size: 12px; color: var(--color-on-surface-variant); margin: 0 0 6px; }
+.pdp-creator-bio { font-size: 13px; line-height: 1.5; margin: 0 0 8px; color: var(--color-on-surface-variant); }
+.pdp-creator-instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-black);
+}
+.pdp-creator-instagram .material-symbols-outlined { font-size: 16px; }
+
 /* ===== Related products ===== */
-.pdp-related { margin-top: 72px; }
+.pdp-related { margin-top: 40px; }
 .pdp-related-title { font-size: 24px; margin-bottom: 24px; }
 
 /* ===== Responsive ===== */

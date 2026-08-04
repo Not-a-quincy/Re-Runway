@@ -1,0 +1,95 @@
+<%- include('partials/header', { section, pageTitle: 'Creators' }) %>
+
+    <div class="admin-header-row">
+        <div>
+            <h1 class="admin-title">CREATORS</h1>
+            <p class="admin-subtitle">Onboard individual creators once, then attribute their products to them — no merchant account needed.</p>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <input type="text" class="admin-search" id="creator-search" placeholder="Search creator name…">
+            <button class="admin-btn admin-btn-primary" id="add-creator-btn">
+                <span class="material-symbols-outlined" style="font-size:18px;">add</span> ADD CREATOR
+            </button>
+        </div>
+    </div>
+
+    <div id="creators-loading" class="admin-loading">Loading creators…</div>
+
+    <div class="admin-table-wrap" id="creators-table-wrap" hidden>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Instagram</th>
+                    <th>Products</th>
+                    <th>Verified</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="creators-table-body"></tbody>
+        </table>
+    </div>
+
+    <!-- Add / Edit Creator Modal -->
+    <div class="admin-modal-scrim" id="creator-modal-scrim">
+        <div class="admin-modal">
+            <div class="admin-modal-head">
+                <h2 id="creator-modal-title">ADD CREATOR</h2>
+                <button class="admin-modal-close" id="creator-modal-close" aria-label="Close">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <p class="admin-form-error" id="creator-form-error"></p>
+
+            <form id="creator-form">
+                <input type="hidden" id="creator-id">
+
+                <div class="admin-form-row">
+                    <label>NAME</label>
+                    <input type="text" id="creator-name" required>
+                </div>
+
+                <div class="admin-form-row two-col">
+                    <div>
+                        <label>CITY (optional)</label>
+                        <input type="text" id="creator-city">
+                    </div>
+                    <div>
+                        <label>CONTACT NUMBER (optional)</label>
+                        <input type="text" id="creator-contact">
+                    </div>
+                </div>
+
+                <div class="admin-form-row two-col">
+                    <div>
+                        <label>INSTAGRAM HANDLE (optional)</label>
+                        <input type="text" id="creator-instagram" placeholder="@handle">
+                    </div>
+                    <div>
+                        <label>PHOTO URL (optional)</label>
+                        <input type="text" id="creator-photo-url" placeholder="https://…">
+                    </div>
+                </div>
+
+                <div class="admin-form-row">
+                    <label>BIO (optional)</label>
+                    <textarea id="creator-bio" placeholder="A line or two shown on the product page."></textarea>
+                </div>
+
+                <div class="admin-checkbox-row" style="margin-bottom:14px;">
+                    <input type="checkbox" id="creator-verified" checked>
+                    <label for="creator-verified" style="margin:0;">VERIFIED CREATOR</label>
+                </div>
+
+                <div class="admin-form-actions">
+                    <button type="button" class="admin-btn" id="creator-cancel-btn">CANCEL</button>
+                    <button type="submit" class="admin-btn admin-btn-primary" id="creator-save-btn">SAVE CREATOR</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<%- include('partials/footer', { pageScript: '/js/admin/creators.js' }) %>

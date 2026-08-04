@@ -186,7 +186,7 @@
 /* ===== Product grid ===== */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 18px;
 }
 
@@ -271,6 +271,7 @@
 @media (max-width: 1024px) {
     .cat-hero { padding: 40px var(--margin-mobile) 28px; }
     .cat-body { padding: 0 var(--margin-mobile) 60px; }
+    .product-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 900px) {
@@ -317,7 +318,7 @@
 }
 
 @media (max-width: 640px) {
-    .product-grid { gap: 10px; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 
     .product-card { border-width: 2px; box-shadow: 3px 3px 0px 0px rgba(0,0,0,1); }
 
@@ -377,5 +378,5 @@
 @media (min-width: 2560px) {
     .cat-layout { max-width: 2100px; }
     .cat-title { font-size: clamp(48px, 3vw, 64px); }
-    .product-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
+    .product-grid { gap: 24px; }
 }

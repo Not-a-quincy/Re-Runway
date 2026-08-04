@@ -30,6 +30,20 @@ async function uniqueSlug(base, excludeId) {
   }
 }
 
+async function uniqueCreatorSlug(base, excludeId) {
+  let slug = slugify(base) || 'creator';
+  let suffix = 1;
+  while (true) {
+    const [rows] = await pool.query(
+      `SELECT id FROM creators WHERE slug = ? ${excludeId ? 'AND id != ?' : ''}`,
+      excludeId ? [slug, excludeId] : [slug]
+    );
+    if (!rows.length) return slug;
+    suffix += 1;
+    slug = `${slugify(base)}-${suffix}`;
+  }
+}
+
 // ---------------------------------------------------------------------------
 // DASHBOARD
 // ---------------------------------------------------------------------------
@@ -93,11 +107,13 @@ router.get('/products', async (req, res) => {
 
     const [[{ total }]] = await pool.query(`SELECT COUNT(*) AS total FROM products p ${whereSql}`, params);
     const [rows] = await pool.query(
-      `SELECT p.*, (
+      `SELECT p.*, c.name AS creator_name, (
          SELECT pi.url FROM product_images pi
          WHERE pi.product_id = p.id ORDER BY pi.sort_order ASC LIMIT 1
        ) AS image_url
-       FROM products p ${whereSql} ORDER BY p.created_at DESC LIMIT ? OFFSET ?`,
+       FROM products p
+       LEFT JOIN creators c ON c.id = p.creator_id
+       ${whereSql} ORDER BY p.created_at DESC LIMIT ? OFFSET ?`,
       [...params, pageSize, offset]
     );
 
@@ -140,6 +156,9 @@ function validateProductBody(body) {
   if (body.originalPrice != null && body.originalPrice !== '' && (isNaN(Number(body.originalPrice)) || Number(body.originalPrice) < 0)) {
     errors.push('Original price must be a positive number.');
   }
+  if (body.creatorId != null && body.creatorId !== '' && isNaN(Number(body.creatorId))) {
+    errors.push('Creator is invalid.');
+  }
   return errors;
 }
 
@@ -148,14 +167,14 @@ router.post('/products', async (req, res) => {
     const errors = validateProductBody(req.body || {});
     if (errors.length) return res.status(400).json({ error: errors.join(' ') });
 
-    const { brand, name, category, audience, price, originalPrice, grade, verified, conditionNotes, materialCare, sellerNotes, stockQty } = req.body;
+    const { brand, name, category, audience, price, originalPrice, grade, verified, conditionNotes, materialCare, sellerNotes, stockQty, creatorId } = req.body;
 
     const slug = await uniqueSlug(`${brand}-${name}`);
 
     const [result] = await pool.query(
       `INSERT INTO products
-        (brand, name, slug, category, audience, price, original_price, grade, verified, condition_notes, material_care, seller_notes, stock_qty)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        (brand, name, slug, category, audience, price, original_price, grade, verified, condition_notes, material_care, seller_notes, stock_qty, creator_id)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         String(brand).trim(),
         String(name).trim(),
@@ -170,6 +189,7 @@ router.post('/products', async (req, res) => {
         materialCare || null,
         sellerNotes || null,
         Math.max(0, parseInt(stockQty, 10) || 0),
+        creatorId ? Number(creatorId) : null,
       ]
     );
 
@@ -190,7 +210,7 @@ router.put('/products/:id', async (req, res) => {
     if (!existingRows.length) return res.status(404).json({ error: 'Product not found' });
     const existing = existingRows[0];
 
-    const { brand, name, category, audience, price, originalPrice, grade, verified, conditionNotes, materialCare, sellerNotes, stockQty } = req.body;
+    const { brand, name, category, audience, price, originalPrice, grade, verified, conditionNotes, materialCare, sellerNotes, stockQty, creatorId } = req.body;
 
     let slug = existing.slug;
     if (brand !== existing.brand || name !== existing.name) {
@@ -201,7 +221,7 @@ router.put('/products/:id', async (req, res) => {
       `UPDATE products SET
          brand = ?, name = ?, slug = ?, category = ?, audience = ?, price = ?, original_price = ?,
          grade = ?, verified = ?, condition_notes = ?, material_care = ?,
-         seller_notes = ?, stock_qty = ?
+         seller_notes = ?, stock_qty = ?, creator_id = ?
        WHERE id = ?`,
       [
         String(brand).trim(),
@@ -217,6 +237,7 @@ router.put('/products/:id', async (req, res) => {
         materialCare || null,
         sellerNotes || null,
         Math.max(0, parseInt(stockQty, 10) || 0),
+        creatorId ? Number(creatorId) : null,
         req.params.id,
       ]
     );
@@ -335,6 +356,133 @@ router.delete('/products/:id/sizes/:sizeId', async (req, res) => {
     res.json({ ok: true });
   } catch (err) {
     console.error('Error deleting product size:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// CREATORS (individual sellers/creators onboarded without a merchant account —
+// products are attributed to them and their info surfaces on the PDP)
+// ---------------------------------------------------------------------------
+
+router.get('/creators', async (req, res) => {
+  try {
+    const search = req.query.q ? String(req.query.q).trim() : '';
+    const where = search ? 'WHERE c.name LIKE ?' : '';
+    const params = search ? [`%${search}%`] : [];
+
+    const [rows] = await pool.query(
+      `SELECT c.*, (
+         SELECT COUNT(*) FROM products p WHERE p.creator_id = c.id
+       ) AS product_count
+       FROM creators c ${where} ORDER BY c.created_at DESC`,
+      params
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error('Error listing creators:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+router.get('/creators/:id', async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM creators WHERE id = ?', [req.params.id]);
+    if (!rows.length) return res.status(404).json({ error: 'Creator not found' });
+    res.json(rows[0]);
+  } catch (err) {
+    console.error('Error loading creator:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+function validateCreatorBody(body) {
+  const errors = [];
+  if (!body.name || !String(body.name).trim()) errors.push('Name is required.');
+  return errors;
+}
+
+router.post('/creators', async (req, res) => {
+  try {
+    const errors = validateCreatorBody(req.body || {});
+    if (errors.length) return res.status(400).json({ error: errors.join(' ') });
+
+    const { name, bio, photoUrl, instagramHandle, contactNumber, city, verified } = req.body;
+    const slug = await uniqueCreatorSlug(name);
+
+    const [result] = await pool.query(
+      `INSERT INTO creators (name, slug, bio, photo_url, instagram_handle, contact_number, city, verified)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        String(name).trim(),
+        slug,
+        bio || null,
+        photoUrl || null,
+        instagramHandle || null,
+        contactNumber || null,
+        city || null,
+        verified !== false,
+      ]
+    );
+
+    const [rows] = await pool.query('SELECT * FROM creators WHERE id = ?', [result.insertId]);
+    res.status(201).json(rows[0]);
+  } catch (err) {
+    console.error('Error creating creator:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+router.put('/creators/:id', async (req, res) => {
+  try {
+    const errors = validateCreatorBody(req.body || {});
+    if (errors.length) return res.status(400).json({ error: errors.join(' ') });
+
+    const [existingRows] = await pool.query('SELECT * FROM creators WHERE id = ?', [req.params.id]);
+    if (!existingRows.length) return res.status(404).json({ error: 'Creator not found' });
+    const existing = existingRows[0];
+
+    const { name, bio, photoUrl, instagramHandle, contactNumber, city, verified } = req.body;
+
+    let slug = existing.slug;
+    if (name !== existing.name) {
+      slug = await uniqueCreatorSlug(name, req.params.id);
+    }
+
+    await pool.query(
+      `UPDATE creators SET
+         name = ?, slug = ?, bio = ?, photo_url = ?, instagram_handle = ?,
+         contact_number = ?, city = ?, verified = ?
+       WHERE id = ?`,
+      [
+        String(name).trim(),
+        slug,
+        bio || null,
+        photoUrl || null,
+        instagramHandle || null,
+        contactNumber || null,
+        city || null,
+        verified !== false,
+        req.params.id,
+      ]
+    );
+
+    const [rows] = await pool.query('SELECT * FROM creators WHERE id = ?', [req.params.id]);
+    res.json(rows[0]);
+  } catch (err) {
+    console.error('Error updating creator:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+router.delete('/creators/:id', async (req, res) => {
+  try {
+    // Products stay listed — their creator_id just falls back to NULL (ON DELETE SET NULL).
+    const [result] = await pool.query('DELETE FROM creators WHERE id = ?', [req.params.id]);
+    if (result.affectedRows === 0) return res.status(404).json({ error: 'Creator not found' });
+    res.json({ ok: true });
+  } catch (err) {
+    console.error('Error deleting creator:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

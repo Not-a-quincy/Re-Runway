@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     conditionNotes: document.getElementById('product-condition-notes'),
     materialCare: document.getElementById('product-material-care'),
     sellerNotes: document.getElementById('product-seller-notes'),
+    creatorId: document.getElementById('product-creator'),
   };
 
   const imagesList = document.getElementById('product-images-list');
@@ -39,6 +40,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   let allProducts = [];
   let searchTimer = null;
+
+  // --- Creators (for the CREATOR dropdown) ---
+  async function loadCreatorOptions() {
+    try {
+      const creators = await AdminUI.api('/api/admin/creators');
+      const current = fields.creatorId.value;
+      fields.creatorId.innerHTML =
+        '<option value="">— No creator attributed —</option>' +
+        creators.map((c) => `<option value="${c.id}">${c.name}${c.city ? ' — ' + c.city : ''}</option>`).join('');
+      fields.creatorId.value = current;
+    } catch (err) {
+      console.error('Failed to load creators:', err);
+    }
+  }
 
   function currency(n) {
     return '₹' + Number(n).toLocaleString('en-IN');
@@ -161,12 +176,14 @@ document.addEventListener('DOMContentLoaded', function () {
     resetForm();
     modalTitle.textContent = 'ADD PRODUCT';
     modalScrim.classList.add('open');
+    loadCreatorOptions();
   }
 
   async function openModal(id) {
     resetForm();
     modalTitle.textContent = 'EDIT PRODUCT';
     modalScrim.classList.add('open');
+    await loadCreatorOptions();
 
     try {
       const product = await AdminUI.api(`/api/admin/products/${id}`);
@@ -183,6 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
       fields.conditionNotes.value = product.condition_notes || '';
       fields.materialCare.value = product.material_care || '';
       fields.sellerNotes.value = product.seller_notes || '';
+      fields.creatorId.value = product.creator_id || '';
 
       renderImages(product.images);
       renderSizes(product.sizes);
@@ -222,6 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
       conditionNotes: fields.conditionNotes.value,
       materialCare: fields.materialCare.value,
       sellerNotes: fields.sellerNotes.value,
+      creatorId: fields.creatorId.value || null,
     };
 
     saveBtn.disabled = true;

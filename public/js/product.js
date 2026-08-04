@@ -24,6 +24,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const sellerNotesEl = document.getElementById('pdp-seller-notes');
   const relatedGrid = document.getElementById('pdp-related-grid');
 
+  const creatorSection = document.getElementById('pdp-creator');
+  const creatorPhoto = document.getElementById('pdp-creator-photo');
+  const creatorName = document.getElementById('pdp-creator-name');
+  const creatorMeta = document.getElementById('pdp-creator-meta');
+  const creatorBio = document.getElementById('pdp-creator-bio');
+  const creatorInstagram = document.getElementById('pdp-creator-instagram');
+  const creatorInstagramLabel = document.getElementById('pdp-creator-instagram-label');
+
   const GRADE_DESCRIPTIONS = {
     S: 'Flawless — zero visible flaws, indistinguishable from a retail rack.',
     A: 'Micro flaw — a barely-there imperfection you\'d have to hunt for. Full condition report below.',
@@ -66,6 +74,31 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
     stockNote.textContent = 'In stock — ships in 2–4 days.';
+  }
+
+  function renderCreator(creator) {
+    if (!creator) {
+      creatorSection.hidden = true;
+      return;
+    }
+
+    creatorPhoto.src = creator.photoUrl || 'https://placehold.co/200x200/eeeeee/1b1b1b?text=' + encodeURIComponent(creator.name.charAt(0));
+    creatorPhoto.alt = creator.name;
+    creatorName.textContent = creator.name + (creator.verified ? ' ✓' : '');
+    creatorMeta.textContent = creator.city ? `Independent creator · ${creator.city}` : 'Independent creator';
+    creatorBio.textContent = creator.bio || '';
+    creatorBio.hidden = !creator.bio;
+
+    if (creator.instagramHandle) {
+      const handle = creator.instagramHandle.replace(/^@/, '');
+      creatorInstagram.href = 'https://instagram.com/' + handle;
+      creatorInstagramLabel.textContent = '@' + handle;
+      creatorInstagram.hidden = false;
+    } else {
+      creatorInstagram.hidden = true;
+    }
+
+    creatorSection.hidden = false;
   }
 
   async function loadProduct() {
@@ -145,6 +178,8 @@ document.addEventListener('DOMContentLoaded', function () {
       conditionNotesEl.textContent = product.conditionNotes || '';
       materialCareEl.textContent = product.materialCare || '';
       sellerNotesEl.textContent = product.sellerNotes || 'No additional seller notes for this piece.';
+
+      renderCreator(product.creator);
 
       relatedGrid.innerHTML = '';
       (product.related || []).forEach((p) => relatedGrid.appendChild(renderRelatedCard(p)));

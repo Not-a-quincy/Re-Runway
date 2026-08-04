@@ -178,6 +178,27 @@ router.get('/:id', async (req, res) => {
       [product.category, product.id]
     );
 
+    let creator = null;
+    if (product.creator_id) {
+      const [creatorRows] = await pool.query(
+        'SELECT id, name, slug, bio, photo_url, instagram_handle, city, verified FROM creators WHERE id = ?',
+        [product.creator_id]
+      );
+      if (creatorRows.length) {
+        const c = creatorRows[0];
+        creator = {
+          id: c.id,
+          name: c.name,
+          slug: c.slug,
+          bio: c.bio,
+          photoUrl: c.photo_url,
+          instagramHandle: c.instagram_handle,
+          city: c.city,
+          verified: !!c.verified,
+        };
+      }
+    }
+
     res.json({
       ...mapProductRow({ ...product, image_url: images[0]?.url }),
       description: product.condition_notes,
@@ -187,6 +208,7 @@ router.get('/:id', async (req, res) => {
       images: images.map((i) => i.url),
       sizes: sizes.map((s) => ({ size: s.size, inStock: !!s.in_stock })),
       related: related.map(mapProductRow),
+      creator,
     });
   } catch (err) {
     console.error('Error fetching product:', err);
