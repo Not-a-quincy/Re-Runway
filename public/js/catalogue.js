@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const clearFiltersBtn = document.getElementById('clear-filters');
 
   const categoryCheckboxes = document.querySelectorAll('#category-filters input[type="checkbox"]');
-  const sourceCheckboxes = document.querySelectorAll('#source-filters input[type="checkbox"]');
+  const audienceCheckboxes = document.querySelectorAll('#audience-filters input[type="checkbox"]');
+  const brandCheckboxes = document.querySelectorAll('#brand-filters input[type="checkbox"]');
   const sizePills = document.querySelectorAll('#size-filters .pill');
   const gradePills = document.querySelectorAll('#grade-filters .pill');
 
@@ -21,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const state = {
     page: 1,
     categories: [],
-    sources: [],
+    audiences: [],
+    brands: [],
     sizes: [],
     grades: [],
     minPrice: null,
@@ -30,6 +32,28 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   let items = [];
+
+  // Pre-fill state from the URL so links like /catalogue?audience=Men or
+  // /catalogue?category=Outerwear (e.g. the homepage hero quick-links) land
+  // on an already-filtered page instead of the unfiltered catalogue.
+  (function hydrateStateFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('category')) state.categories = params.get('category').split(',').filter(Boolean);
+    if (params.has('audience')) state.audiences = params.get('audience').split(',').filter(Boolean);
+    if (params.has('brand')) state.brands = params.get('brand').split(',').filter(Boolean);
+    if (params.has('size')) state.sizes = params.get('size').split(',').filter(Boolean);
+    if (params.has('grade')) state.grades = params.get('grade').split(',').filter(Boolean);
+    if (params.has('minPrice')) state.minPrice = Number(params.get('minPrice'));
+    if (params.has('maxPrice')) state.maxPrice = Number(params.get('maxPrice'));
+    if (params.has('sort') && sortSelect.querySelector(`option[value="${params.get('sort')}"]`)) {
+      state.sort = params.get('sort');
+    }
+
+    syncControlsFromState();
+    if (state.minPrice != null) priceMinInput.value = state.minPrice;
+    if (state.maxPrice != null) priceMaxInput.value = state.maxPrice;
+    sortSelect.value = state.sort;
+  })();
 
   function currency(n) {
     return '₹' + Number(n).toLocaleString('en-IN');
@@ -62,7 +86,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const chips = [
       ...state.categories.map((v) => ({ type: 'categories', value: v, label: v.toUpperCase() })),
-      ...state.sources.map((v) => ({ type: 'sources', value: v, label: v.toUpperCase() })),
+      ...state.audiences.map((v) => ({ type: 'audiences', value: v, label: v.toUpperCase() })),
+      ...state.brands.map((v) => ({ type: 'brands', value: v, label: v.toUpperCase() })),
       ...state.sizes.map((v) => ({ type: 'sizes', value: v, label: 'SIZE ' + v })),
       ...state.grades.map((v) => ({ type: 'grades', value: v, label: 'GRADE ' + v })),
     ];
@@ -83,7 +108,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function syncControlsFromState() {
     categoryCheckboxes.forEach((cb) => (cb.checked = state.categories.includes(cb.value)));
-    sourceCheckboxes.forEach((cb) => (cb.checked = state.sources.includes(cb.value)));
+    audienceCheckboxes.forEach((cb) => (cb.checked = state.audiences.includes(cb.value)));
+    brandCheckboxes.forEach((cb) => (cb.checked = state.brands.includes(cb.value)));
     sizePills.forEach((pill) => pill.classList.toggle('active', state.sizes.includes(pill.dataset.value)));
     gradePills.forEach((pill) => pill.classList.toggle('active', state.grades.includes(pill.dataset.value)));
   }
@@ -91,7 +117,8 @@ document.addEventListener('DOMContentLoaded', function () {
   function buildQuery() {
     const params = new URLSearchParams();
     if (state.categories.length) params.set('category', state.categories.join(','));
-    if (state.sources.length) params.set('source', state.sources.join(','));
+    if (state.audiences.length) params.set('audience', state.audiences.join(','));
+    if (state.brands.length) params.set('brand', state.brands.join(','));
     if (state.sizes.length) params.set('size', state.sizes.join(','));
     if (state.grades.length) params.set('grade', state.grades.join(','));
     if (state.minPrice != null) params.set('minPrice', state.minPrice);
@@ -144,9 +171,17 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   );
 
-  sourceCheckboxes.forEach((cb) =>
+  audienceCheckboxes.forEach((cb) =>
     cb.addEventListener('change', () => {
-      state.sources = Array.from(sourceCheckboxes).filter((c) => c.checked).map((c) => c.value);
+      state.audiences = Array.from(audienceCheckboxes).filter((c) => c.checked).map((c) => c.value);
+      state.page = 1;
+      fetchProducts(false);
+    })
+  );
+
+  brandCheckboxes.forEach((cb) =>
+    cb.addEventListener('change', () => {
+      state.brands = Array.from(brandCheckboxes).filter((c) => c.checked).map((c) => c.value);
       state.page = 1;
       fetchProducts(false);
     })
@@ -195,7 +230,8 @@ document.addEventListener('DOMContentLoaded', function () {
   if (clearFiltersBtn) {
     clearFiltersBtn.addEventListener('click', () => {
       state.categories = [];
-      state.sources = [];
+      state.audiences = [];
+      state.brands = [];
       state.sizes = [];
       state.grades = [];
       state.minPrice = null;

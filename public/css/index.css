@@ -1,7 +1,6 @@
 /* Hero Section */
 .hero {
     position: relative;
-    min-height: 480px;
     background-image: radial-gradient(#000 1px, transparent 1px);
     background-size: 20px 20px;
     transition: height 0.35s ease, min-height 0.35s ease, padding 0.35s ease;
@@ -117,7 +116,6 @@
 /* 1. Tablet Screens (<= 1024px) */
 @media (max-width: 1024px) {
   .banner-img-div {
-    width: calc(100% - (var(--margin-mobile) * 2));
     height: 75vh;
     padding: 24px;
   }
@@ -191,9 +189,9 @@
 
 /* 3. Small Mobile Devices (<= 480px) */
 @media (max-width: 480px) {
+
   .banner-img-div {
     height: 65vh;
-    min-height: 420px;
     padding: 16px;
   }
 
@@ -291,9 +289,6 @@
   .cart-btn {
     padding: 10px;
   }
-  .hero{
-    height: 70vh;
-  }
 }
 
 
@@ -339,12 +334,13 @@
 
   .nav-links {
     position: fixed;
-    top: 80px;
+    top: 62px;
     left: 0;
     right: 0;
     z-index: 90;
     display: none;
     width: 100%;
+    height: 100vh;
     box-sizing: border-box;
     height: calc(100vh - 80px);
     background-color: var(--color-surface);
@@ -392,7 +388,6 @@
 }
 
 @media (min-width: 2560px) {
-  .banner-img-div { max-width: 2200px; margin: 0 auto; }
   .hero-content { max-width: 860px; }
   .hero-title { font-size: 88px; }
   .hero-subtitle { font-size: 20px; }

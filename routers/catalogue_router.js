@@ -5,7 +5,11 @@ const router = express.Router();
 
 const ALLOWED_CATEGORIES = ['Outerwear', 'Denim', 'Knitwear', 'Footwear', 'Accessories'];
 const ALLOWED_GRADES = ['S', 'A', 'B', 'C'];
-const ALLOWED_SOURCES = ['Tokyo Exclusive', 'Vault Archive', 'Steal Deal'];
+const ALLOWED_AUDIENCE = ['Men', 'Women', 'Unisex'];
+// Brand is free text in the DB (not an ENUM), so this isn't a hard allowlist —
+// it's just the current catalogue's brand set, used to render filter checkboxes.
+// New brands added via the admin panel will still be filterable even if not listed here.
+const KNOWN_BRANDS = ['Carhartt WIP', 'Visvim', 'Kapital', 'Needles', 'Stussy'];
 
 const SORT_MAP = {
   newest: 'p.created_at DESC',
@@ -38,7 +42,7 @@ function mapProductRow(row) {
         ? Math.round((1 - Number(row.price) / Number(row.original_price)) * 100)
         : null,
     grade: row.grade,
-    source: row.source,
+    audience: row.audience,
     verified: !!row.verified,
     image: row.image_url || 'https://placehold.co/400x500/eeeeee/1b1b1b?text=IMG',
     inStock: row.stock_qty > 0,
@@ -46,12 +50,15 @@ function mapProductRow(row) {
 }
 
 // GET /api/products
-// Query params: category, grade, size, source, minPrice, maxPrice, sort, page, pageSize, q
+// Query params: category, grade, audience, brand, size, minPrice, maxPrice, sort, page, pageSize, q
 router.get('/', async (req, res) => {
   try {
     const categories = parseListParam(req.query.category, ALLOWED_CATEGORIES);
     const grades = parseListParam(req.query.grade, ALLOWED_GRADES);
-    const sources = parseListParam(req.query.source, ALLOWED_SOURCES);
+    const audiences = parseListParam(req.query.audience, ALLOWED_AUDIENCE);
+    // Brand isn't restricted to KNOWN_BRANDS — any brand actually in the DB
+    // (including ones added later via the admin panel) is filterable.
+    const brands = parseListParam(req.query.brand);
     const sizes = parseListParam(req.query.size);
     const minPrice = req.query.minPrice ? Number(req.query.minPrice) : null;
     const maxPrice = req.query.maxPrice ? Number(req.query.maxPrice) : null;
@@ -73,9 +80,13 @@ router.get('/', async (req, res) => {
       where.push(`p.grade IN (${grades.map(() => '?').join(',')})`);
       params.push(...grades);
     }
-    if (sources.length) {
-      where.push(`p.source IN (${sources.map(() => '?').join(',')})`);
-      params.push(...sources);
+    if (audiences.length) {
+      where.push(`p.audience IN (${audiences.map(() => '?').join(',')})`);
+      params.push(...audiences);
+    }
+    if (brands.length) {
+      where.push(`p.brand IN (${brands.map(() => '?').join(',')})`);
+      params.push(...brands);
     }
     if (sizes.length) {
       where.push(

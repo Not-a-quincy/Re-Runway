@@ -5,7 +5,7 @@ const router = express.Router();
 
 const CATEGORIES = ['Outerwear', 'Denim', 'Knitwear', 'Footwear', 'Accessories'];
 const GRADES = ['S', 'A', 'B', 'C'];
-const SOURCES = ['Tokyo Exclusive', 'Vault Archive', 'Steal Deal'];
+const AUDIENCES = ['Men', 'Women', 'Unisex'];
 
 function slugify(text) {
   return String(text)
@@ -135,7 +135,7 @@ function validateProductBody(body) {
   if (!body.name || !String(body.name).trim()) errors.push('Name is required.');
   if (!CATEGORIES.includes(body.category)) errors.push('Category must be one of: ' + CATEGORIES.join(', '));
   if (!GRADES.includes(body.grade)) errors.push('Grade must be one of: ' + GRADES.join(', '));
-  if (body.source && !SOURCES.includes(body.source)) errors.push('Source must be one of: ' + SOURCES.join(', '));
+  if (!AUDIENCES.includes(body.audience)) errors.push('Audience must be one of: ' + AUDIENCES.join(', '));
   if (body.price == null || isNaN(Number(body.price)) || Number(body.price) < 0) errors.push('Price must be a positive number.');
   if (body.originalPrice != null && body.originalPrice !== '' && (isNaN(Number(body.originalPrice)) || Number(body.originalPrice) < 0)) {
     errors.push('Original price must be a positive number.');
@@ -148,23 +148,23 @@ router.post('/products', async (req, res) => {
     const errors = validateProductBody(req.body || {});
     if (errors.length) return res.status(400).json({ error: errors.join(' ') });
 
-    const { brand, name, category, price, originalPrice, grade, source, verified, conditionNotes, materialCare, sellerNotes, stockQty } = req.body;
+    const { brand, name, category, audience, price, originalPrice, grade, verified, conditionNotes, materialCare, sellerNotes, stockQty } = req.body;
 
     const slug = await uniqueSlug(`${brand}-${name}`);
 
     const [result] = await pool.query(
       `INSERT INTO products
-        (brand, name, slug, category, price, original_price, grade, source, verified, condition_notes, material_care, seller_notes, stock_qty)
+        (brand, name, slug, category, audience, price, original_price, grade, verified, condition_notes, material_care, seller_notes, stock_qty)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         String(brand).trim(),
         String(name).trim(),
         slug,
         category,
+        audience,
         Number(price),
         originalPrice ? Number(originalPrice) : null,
         grade,
-        source || null,
         !!verified,
         conditionNotes || null,
         materialCare || null,
@@ -190,7 +190,7 @@ router.put('/products/:id', async (req, res) => {
     if (!existingRows.length) return res.status(404).json({ error: 'Product not found' });
     const existing = existingRows[0];
 
-    const { brand, name, category, price, originalPrice, grade, source, verified, conditionNotes, materialCare, sellerNotes, stockQty } = req.body;
+    const { brand, name, category, audience, price, originalPrice, grade, verified, conditionNotes, materialCare, sellerNotes, stockQty } = req.body;
 
     let slug = existing.slug;
     if (brand !== existing.brand || name !== existing.name) {
@@ -199,8 +199,8 @@ router.put('/products/:id', async (req, res) => {
 
     await pool.query(
       `UPDATE products SET
-         brand = ?, name = ?, slug = ?, category = ?, price = ?, original_price = ?,
-         grade = ?, source = ?, verified = ?, condition_notes = ?, material_care = ?,
+         brand = ?, name = ?, slug = ?, category = ?, audience = ?, price = ?, original_price = ?,
+         grade = ?, verified = ?, condition_notes = ?, material_care = ?,
          seller_notes = ?, stock_qty = ?
        WHERE id = ?`,
       [
@@ -208,10 +208,10 @@ router.put('/products/:id', async (req, res) => {
         String(name).trim(),
         slug,
         category,
+        audience,
         Number(price),
         originalPrice ? Number(originalPrice) : null,
         grade,
-        source || null,
         !!verified,
         conditionNotes || null,
         materialCare || null,

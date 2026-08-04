@@ -48,17 +48,19 @@ CREATE TABLE IF NOT EXISTS products (
   name             VARCHAR(200) NOT NULL,
   slug             VARCHAR(220) NOT NULL UNIQUE,
   category         ENUM('Outerwear','Denim','Knitwear','Footwear','Accessories') NOT NULL,
+  audience         ENUM('Men','Women','Unisex') NOT NULL DEFAULT 'Unisex',
   price            DECIMAL(10,2) NOT NULL,
   original_price   DECIMAL(10,2) NULL,
   grade            ENUM('S','A','B','C') NOT NULL,
-  source           ENUM('Tokyo Exclusive','Vault Archive','Steal Deal') NULL,
   verified         BOOLEAN NOT NULL DEFAULT TRUE,
   condition_notes  TEXT,
   material_care    TEXT,
   seller_notes     TEXT,
   stock_qty        INT NOT NULL DEFAULT 0,
   created_at       TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_products_brand (brand),
   INDEX idx_products_category (category),
+  INDEX idx_products_audience (audience),
   INDEX idx_products_grade (grade),
   INDEX idx_products_price (price)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -115,27 +117,27 @@ INSERT INTO users (name, email, password_hash, role) VALUES
 
 INSERT INTO banners (title, subtitle, image_url, sort_order) VALUES
 ('NEW DROP', 'Deadstock and export surplus, handpicked and quality-checked.', 'https://placehold.co/1600x900/1b1b1b/eeeeee?text=Re-Runway', 0),
-('TOKYO EXCLUSIVES', 'Sourced directly from trusted partners in Tokyo.', 'https://placehold.co/1600x900/222222/eeeeee?text=Tokyo+Exclusives', 1),
+('BRAND DEADSTOCK', 'Carhartt WIP, Visvim, Kapital, Needles, Stussy — sourced directly, verified before listing.', 'https://placehold.co/1600x900/222222/eeeeee?text=Brand+Deadstock', 1),
 ('STEAL DEALS', 'Grade B and C pieces — minor factory flaws, steep discounts.', 'https://placehold.co/1600x900/333333/eeeeee?text=Steal+Deals', 2);
 
-INSERT INTO products (brand, name, slug, category, price, original_price, grade, source, verified, condition_notes, material_care, seller_notes, stock_qty) VALUES
-('CARHARTT WIP', 'Detroit Jacket, Duck Canvas', 'carhartt-wip-detroit-jacket-duck-canvas', 'Outerwear', 15800.00, 28000.00, 'A', NULL, TRUE,
+INSERT INTO products (brand, name, slug, category, audience, price, original_price, grade, verified, condition_notes, material_care, seller_notes, stock_qty) VALUES
+('CARHARTT WIP', 'Detroit Jacket, Duck Canvas', 'carhartt-wip-detroit-jacket-duck-canvas', 'Outerwear', 'Unisex', 15800.00, 28000.00, 'A', TRUE,
   'Grade A — micro flaw. Faint fading on left cuff from the dye lot, barely visible unless you''re looking for it. No rips, tears, or stains. Original hardware intact, interior tag present and legible.',
   '100% cotton duck canvas, blanket-lined collar. Machine wash cold, hang dry. Do not iron directly on hardware.',
   'Brand deadstock, sourced directly from Carhartt WIP surplus.', 1),
-('VISVIM', 'FBT Suede Low-Tops', 'visvim-fbt-suede-low-tops', 'Footwear', 34200.00, NULL, 'S', 'Tokyo Exclusive', TRUE,
+('VISVIM', 'FBT Suede Low-Tops', 'visvim-fbt-suede-low-tops', 'Footwear', 'Men', 34200.00, NULL, 'S', TRUE,
   'Grade S — flawless. Factory-fresh, no visible flaws.', 'Suede upper. Spot clean only, use a suede brush.',
-  'Export surplus sourced directly from a trusted Tokyo partner.', 2),
-('KAPITAL', 'Boro Patchwork Denim', 'kapital-boro-patchwork-denim', 'Denim', 22100.00, NULL, 'B', 'Vault Archive', FALSE,
+  'Export surplus, verified before listing.', 2),
+('KAPITAL', 'Boro Patchwork Denim', 'kapital-boro-patchwork-denim', 'Denim', 'Unisex', 22100.00, NULL, 'B', FALSE,
   'Grade B — visible flaw. The boro-style patchwork is part of the original design, not damage; graded B for a minor stitching irregularity on the rear pocket. No structural issues.', 'Cold wash inside out, hang dry.',
   'Archive deadstock, verified before listing.', 1),
-('NEEDLES', 'Track Jacket, Papillon', 'needles-track-jacket-papillon', 'Outerwear', 11900.00, NULL, 'C', 'Steal Deal', FALSE,
+('NEEDLES', 'Track Jacket, Papillon', 'needles-track-jacket-papillon', 'Outerwear', 'Women', 11900.00, NULL, 'C', FALSE,
   'Grade C — overrun flaw. A noticeable print misalignment on the back panel, the reason this piece didn''t make retail shelves. Fully functional.', 'Machine wash cold, lay flat to dry.',
   'Export surplus, priced to move because of the print flaw above.', 3),
-('CARHARTT WIP', 'OG Chore Coat', 'carhartt-wip-og-chore-coat', 'Outerwear', 13400.00, NULL, 'A', NULL, TRUE,
+('CARHARTT WIP', 'OG Chore Coat', 'carhartt-wip-og-chore-coat', 'Outerwear', 'Unisex', 13400.00, NULL, 'A', TRUE,
   'Grade A — micro flaw. A faint stitching irregularity on the inner seam, not visible when worn. Excellent structure otherwise.', '100% cotton, machine wash cold.',
   'Brand deadstock, sourced directly from Carhartt WIP surplus.', 2),
-('STUSSY', 'Work Vest, Ripstop', 'stussy-work-vest-ripstop', 'Accessories', 8600.00, NULL, 'B', 'Steal Deal', FALSE,
+('STUSSY', 'Work Vest, Ripstop', 'stussy-work-vest-ripstop', 'Accessories', 'Unisex', 8600.00, NULL, 'B', FALSE,
   'Grade B — visible flaw. A small dye inconsistency on one pocket. No functional issues.', 'Machine wash cold.',
   'Export surplus, verified before listing.', 4);
 

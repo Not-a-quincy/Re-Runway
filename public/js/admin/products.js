@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     grade: document.getElementById('product-grade'),
     price: document.getElementById('product-price'),
     originalPrice: document.getElementById('product-original-price'),
-    source: document.getElementById('product-source'),
+    audience: document.getElementById('product-audience'),
     stock: document.getElementById('product-stock'),
     verified: document.getElementById('product-verified'),
     conditionNotes: document.getElementById('product-condition-notes'),
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
       fields.grade.value = product.grade;
       fields.price.value = product.price;
       fields.originalPrice.value = product.original_price || '';
-      fields.source.value = product.source || '';
+      fields.audience.value = product.audience || 'Unisex';
       fields.stock.value = product.stock_qty;
       fields.verified.checked = !!product.verified;
       fields.conditionNotes.value = product.condition_notes || '';
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
       grade: fields.grade.value,
       price: fields.price.value,
       originalPrice: fields.originalPrice.value || null,
-      source: fields.source.value || null,
+      audience: fields.audience.value,
       stockQty: fields.stock.value,
       verified: fields.verified.checked,
       conditionNotes: fields.conditionNotes.value,

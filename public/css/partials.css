@@ -64,29 +64,6 @@
   gap: 16px;
 }
 
-.search-container {
-  position: relative;
-}
-
-.search-input {
-  background-color: var(--color-surface-container);
-  border: 3px solid var(--color-black);
-  padding: 8px 12px;
-  font-size: 14px;
-  font-weight: 700;
-  outline: none;
-  width: 180px;
-  transition: transform var(--transition-snappy), 
-    box-shadow var(--transition-snappy), 
-    width var(--transition-snappy);
-}
-
-.search-input:focus {
-  transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
-  background-color: var(--color-white);
-}
-
 .cart-btn {
     display: flex;
     align-items: center;

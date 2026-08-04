@@ -16,16 +16,11 @@
         </div>
     </div>
     <div class="nav-right">
-        <div class="search-container" id="nav-search-container">
-            <input class="search-input" placeholder="SEARCH..." type="text" id="nav-search-input" autocomplete="off">
-            <button class="nav-search-btn" id="nav-search-btn" aria-label="Search">
-            </button>
-        </div>
         <% if (typeof user !== 'undefined' && user) { %>
             <% if (user.role === 'admin') { %>
                 <a class="nav-link nav-account" href="/admin">ADMIN</a>
             <% } %>
-            <a class="nav-link nav-account" href="/cart">HI, <%= user.name.split(' ')[0].toUpperCase() %></a>
+            <a class="nav-link nav-account" <%#href="/cart"%>>HI, <%= user.name.split(' ')[0].toUpperCase() %></a>
             <form action="/logout" method="POST" class="nav-logout-form">
                 <button type="submit" class="nav-link nav-logout-btn">LOG OUT</button>
             </form>
