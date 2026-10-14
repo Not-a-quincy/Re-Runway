@@ -1,5 +1,8 @@
--- Run this migration to add the newsletter subscribers table.
+-- Migration: adds the newsletter signup table.
+-- Run this if you already loaded schema.sql before this existed.
 --   mysql -u <DB_USER> -p <DB_NAME> < database/migration_newsletter.sql
+
+USE `re-runway`;
 
 CREATE TABLE IF NOT EXISTS newsletter_subscribers (
   id         INT AUTO_INCREMENT PRIMARY KEY,

@@ -18,76 +18,6 @@ data, vanilla JS on the client.
 - **Admin panel** — `/admin`, admin-only. Full write access to products (incl.
   stock, images, sizes), banners, and user roles. Details below.
 
-## Admin panel
-
-Everything lives under `/admin` and is guarded by `middleware/admin_auth.js` —
-both the pages and the underlying `/api/admin/*` JSON API require a logged-in
-user with `role = 'admin'`.
-
-**Default login** (seeded by `schema.sql`):
-```
-email:    admin@rerunway.com
-password: Admin@12345
-```
-**Change this password immediately** — either through your own account
-settings once you build one, or directly in MySQL:
-```sql
-UPDATE users SET password_hash = '<a bcrypt hash>' WHERE email = 'admin@rerunway.com';
-```
-(You can generate a hash with `node -e "require('bcryptjs').hash('yourpassword', 10).then(console.log)"`.)
-
-To make an *existing* account (e.g. your own signup) an admin instead of
-using the seeded one:
-```sql
-UPDATE users SET role = 'admin' WHERE email = 'you@example.com';
-```
-
-**What's in the panel:**
-- **Dashboard** (`/admin`) — counts (products, users, banners, carts with
-  items), out-of-stock/low-stock warnings, recently added products/users.
-- **Products** (`/admin/products`) — search, add/edit via modal, delete,
-  inline quick-stock edit right in the table, plus per-product image and
-  size management (add/remove images by URL, add/remove sizes and toggle
-  each one's in-stock status).
-- **Banners** (`/admin/banners`) — add/edit/delete, reorder via a sort-order
-  number, toggle active/hidden.
-- **Users** (`/admin/users`) — see everyone, change roles between `user` and
-  `admin`, delete accounts. You can't delete your own account from here, and
-  the system won't let the *last* remaining admin demote themselves — that's
-  a deliberate guardrail against accidental lockout.
-
-**If you already had the database set up before the admin panel existed**,
-run the migration instead of the full schema:
-```bash
-mysql -u <DB_USER> -p <DB_NAME> < database/migration_admin.sql
-```
-This adds the `role` column to `users` and seeds the default admin account
-without touching your existing data.
-
-**If you already had the database set up before the audience/brand change**,
-run this migration too:
-```bash
-mysql -u <DB_USER> -p <DB_NAME> < database/migration_audience_brand.sql
-```
-This drops the old `source` column (Tokyo Exclusive / Vault Archive / Steal
-Deal — leftover placeholder categories that didn't reflect real sourcing) and
-adds a proper `audience` column (Men/Women/Unisex), plus an index on `brand`
-since brand is now the field the catalogue filters by instead of `source`.
-
-There's no image upload — images are added by pasting a URL (same as the
-original seed data, which uses placeholder images). Wiring up real file
-uploads (e.g. to S3 or local disk) is a reasonable next step if you need it.
-
-## Not built yet (by design — flagging so it's not a surprise)
-
-- **Checkout / payments.** The CHECKOUT button on the cart page is a
-  placeholder that tells the user it's not wired up. Hooking up a real payment
-  provider is a separate project.
-- **Promo codes.** The APPLY button explains codes aren't supported yet.
-- **Product search bar** in the navbar is still just an `<input>` with no
-  backend behind it (the `/api/products?q=` param exists server-side if you
-  want to wire it up).
-- **Password reset / "forgot password"** link on the login page goes nowhere.
 
 ## Setup
 
@@ -99,11 +29,7 @@ uploads (e.g. to S3 or local disk) is a reasonable next step if you need it.
 2. **Create your `.env`** (copy `.env.example` and fill in real values):
    ```bash
    cp .env.example .env
-   ```
-   > ⚠️ The previous `.env` committed to this repo had a real database
-   > password in it. If that password is still in use anywhere, rotate it —
-   > anything pushed to a public GitHub repo should be treated as compromised.
-
+   
 3. **Create the database and load the schema** (creates tables + seeds a
    handful of products/banners so the site isn't empty on first run):
    ```bash
